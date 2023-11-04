@@ -1,0 +1,94 @@
+.section-heading{
+    display: inline;
+}
+.content-section .fa-fire-flame-curved,
+.fa-circle-check {
+  color: var(--main-color);
+}
+.content-section .section-heading {
+  font-size: 25px;
+  font-weight: 600;
+}
+.grid-item {
+    text-align: center;
+    padding: 25px;
+}
+.grid-item img {
+    max-width: 100%; /* Ensure images don't exceed the column width */
+}
+
+/* Style the left navigation arrow */
+.owl-carousel .owl-nav .owl-prev {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Background color */
+    padding: 10px;
+    margin: 0 20px;
+    border-radius: 5px; /* Round the left edge */
+    color: white; /* Arrow color */
+  }
+  
+  /* Style the right navigation arrow */
+  .owl-carousel .owl-nav .owl-next {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Background color */
+    padding: 10px;
+    margin: 0 20px;
+
+    border-radius: 5px; /* Round the right edge */
+    color: white; /* Arrow color */
+  }
+  
+  /* Hover effect for navigation arrows (optional) */
+  .owl-carousel .owl-nav .owl-prev:hover,
+  .owl-carousel .owl-nav .owl-next:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darken background on hover */
+  }
+  .owl-nav i {
+    font-size: 52px;
+  }
+  .caption {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .caption img {
+    width: 100%;
+    display: block;
+  }
+  
+  .caption-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Black with 70% opacity */
+    color: white;
+    padding: 10px;
+    width: 100%;
+    height: 25%;
+  }
+  
+  .caption-content h3 {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .caption-content p {
+    font-size: 14px;
+    margin: 0;
+  }
+  .item {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+ .row-commic {
+  display: flex;
+  flex-wrap: wrap;
+  height: calc 4;
+  }

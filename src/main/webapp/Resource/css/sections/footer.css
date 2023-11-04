@@ -1,0 +1,35 @@
+/* Footer styles */
+#footer {
+    background-color: #333; /* Background color for the footer */
+    color: white; /* Text color for the footer */
+    padding: 20px; /* Padding to create space inside the footer */
+    text-align: center; /* Center-align text in the footer */
+}
+
+/* Style the footer links */
+#footer a {
+    color: white; /* Text color for links in the footer */
+    text-decoration: none; /* Remove underlines from links */
+}
+
+/* Style the social icons in the footer */
+#footer .social-icons {
+    margin-top: 20px; /* Add some space above the social icons */
+}
+
+#footer .social-icons a {
+    color: white; /* Color of the social icons */
+    font-size: 24px; /* Adjust the font size as needed */
+    margin: 0 10px; /* Add space between social icons */
+}
+
+/* Media query for responsive design (adjust as needed) */
+@media (max-width: 768px) {
+    #footer {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+    
+    #footer .social-icons a {
+        font-size: 20px; /* Adjust the font size for smaller screens */
+    }
+}
