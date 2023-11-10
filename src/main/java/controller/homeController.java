@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import BO.*;
+import DAO.*;
 import DTO.*;
 @WebServlet(urlPatterns = "/home", name = "Home")
 public class homeController extends HttpServlet{
@@ -27,21 +26,26 @@ public class homeController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String page = "0";
-		//tạo và set cho list bằng null
-		ArrayList<Story> list = null;
+		storyDAO Story = new storyDAO();
+		String indexPage = request.getParameter("index");
+		if(indexPage == null) {
+			indexPage = "1";
+		}
 		try {
-			//gọi dữ liệu đc lấy ra từ StoryBO
-			list = storyBO.listStory(Integer.parseInt(page));
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		//tạo biến và request cho jsp
-		request.setAttribute("page", page);
-		request.setAttribute("storyList", list);
-		RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/index.jsp");
-		rd.forward(request, response);
+			int Count = Story.CountPage();
+			int pageSize = 20;
+			int endPage = Count / pageSize;
+			if(Count % pageSize != 0) {
+				endPage++;
+			}
+			ArrayList<Story> list = new ArrayList<Story>();
+			list = Story.getStory((Integer.parseInt(indexPage)-1)*20);
+			request.setAttribute("indexPage", indexPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("listStory", list);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} catch (Exception e) {}
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

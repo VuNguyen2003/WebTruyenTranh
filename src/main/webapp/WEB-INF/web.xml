@@ -3,7 +3,7 @@
   <display-name>WebTruyenTranh</display-name>
 
   	<welcome-file-list>
-    <welcome-file>homeController</welcome-file>
+    <welcome-file>home</welcome-file>
   	</welcome-file-list>
 	<servlet>
 		<servlet-name>Home</servlet-name>

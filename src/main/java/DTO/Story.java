@@ -9,17 +9,18 @@ public class Story implements Serializable{
     private String uploadDate;
     private float rating;
     private String cover;
-
+    private int favorite;
     
     public Story() {
     }
 
-    public Story(int storyId, String title, String uploadDate, float rating, String cover) {
+    public Story(int storyId, String title, String uploadDate, float rating, String cover, int favorite) {
         this.storyId = storyId;
         this.title = title;
         this.uploadDate = uploadDate;
         this.rating = rating;
         this.cover = cover;
+        this.favorite = favorite;
     }
 
     
@@ -61,5 +62,13 @@ public class Story implements Serializable{
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+    
+    public int getFavorite() {
+    	return favorite;
+    }
+    
+    public void setFavorite(int favorite) {
+    	this.favorite = favorite;
     }
 }

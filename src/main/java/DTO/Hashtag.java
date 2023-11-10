@@ -1,16 +1,13 @@
 package DTO;
 
-import java.io.Serializable;
-
-@SuppressWarnings("serial")
-public class Hastag implements Serializable {
+public class Hashtag {
 	private int tagId;
     private String tagName;
 
-    public Hastag() {
+    public Hashtag() {
     }
 
-    public Hastag(int tagId, String tagName) {
+    public Hashtag(int tagId, String tagName) {
         this.tagId = tagId;
         this.tagName = tagName;
     }
