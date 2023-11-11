@@ -1,0 +1,15 @@
+#main {
+    background-color: #ebebeb;
+}
+#content .container {
+    background-color: #f9f9f9;
+}
+.show .search-cate {
+    display: flex;
+    /* float: right; */
+}
+
+.col-sm-offset-2 {  
+    float: right;
+    margin-bottom: 16px;
+}

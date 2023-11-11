@@ -87,8 +87,26 @@
     margin-right: 20px;
   }
   
- .row-commic {
+  .pagination {
   display: flex;
-  flex-wrap: wrap;
-  height: calc 4;
-  }
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-item--active .pagination-item_link {
+  color: var(--secondary-color);
+  background-color: var(--main-color);
+}
+
+.pagination-item_link {
+  --height: 30px;
+  display: block;
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: var(--third-color);
+  min-width: 40px;
+  height: var(--height);
+  line-height: var(--height);
+  text-align: center;
+  border-radius: 5px;
+}

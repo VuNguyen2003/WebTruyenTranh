@@ -13,7 +13,7 @@
                 <div class="header-container">
                     <div class="header-logo">
                         <img src="Resource/img/Icon.png" alt="" class="header-logo-image">
-                        <a href="index.html" class="header-logo-content">ANIMEWORLD</a>
+                        <a href="home" class="header-logo-content">ANIMEWORLD</a>
                     </div>
                     <ul class="header-account">
                         <li class="account-item">
@@ -35,7 +35,7 @@
                             </a>
                             <ul class="sub-menu">
                                 <li><a href="">CATEGORY</a></li>
-                                <li><a href="">ADVANCE SEARCH</a></li>
+                                <li><a href="hastagsearch">ADVANCE SEARCH</a></li>
                                 <li><a href="">FAVORITE</a></li>
                             </ul>
                         </li>
@@ -45,15 +45,21 @@
                         <li><a href="per-info.html">SETTING</a></li>
                     </div>
                     <div class="menu-right">
-                        <div class="search-btn">
+                        <form action="search" class="search-btn">
                             <i class="fa-sharp fa-regular fa-bell"></i>
-                            <input type="text" placeholder="Search comics/authors">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
+                            <input type="text" name="id" placeholder="Search comics/authors">
+                            <button class="fa-solid fa-magnifying-glass" onclick="submitForm()"></button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
 	</div>
+	<script>
+	    // hàm để submit form khi click vào button
+	    function submitForm() {
+	      document.forms[0].submit();
+	    }
+  	</script>
 </body>
 </html>
