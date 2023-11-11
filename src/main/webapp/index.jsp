@@ -39,86 +39,18 @@
                         <!-- owl carousel, display 5/n -->
                         <div class="owl-carousel owl-theme">
                             <!-- item 1 -->
+                            <c:forEach var="i" begin="1" end="8">
                             <div class="item">
                                 <div class="caption">
                                     <img class="img-fluid" src="Resource/img/images/img-1.jpg" alt="Image 1">
                                     <div class="caption-content">
-                                        <h3>Caption 2</h3>
+                                        <h3>Caption 1</h3>
                                         <p>This is the caption for image 2.</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
-                                <!-- item 2 -->
-                                <div class="caption">
-                                    <img src="Resource/img/images/img-3.jpg" alt="Image 1">
-                                    <div class="caption-content">
-                                        <h3>Caption 2</h3>
-                                        <p>This is the caption for image 2.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <!-- item 3 -->
-                                <div class="caption">
-                                    <img src="Resource/img/images/img-2.jpg" alt="Image 1">
-                                    <div class="caption-content">
-                                        <h3>Caption 2</h3>
-                                        <p>This is the caption for image 2.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <!-- item 4 -->
-                                <div class="caption">
-                                    <img src="Resource/img/images/img-1.jpg" alt="Image 1">
-                                    <div class="caption-content">
-                                        <h3>Caption 2</h3>
-                                        <p>This is the caption for image 2.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <!-- item 5 -->
-                                <div class="caption">
-                                    <img src="Resource/img/images/img-1.jpg" alt="Image 1">
-                                    <div class="caption-content">
-                                        <h3>Caption 2</h3>
-                                        <p>This is the caption for image 2.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <!-- item 6 -->
-                                <div class="caption">
-                                    <img src="Resource/img/images/img-1.jpg" alt="Image 1">
-                                    <div class="caption-content">
-                                        <h3>Caption 2</h3>
-                                        <p>This is the caption for image 2.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <!-- item 7 -->
-                                <div class="caption">
-                                    <img src="Resource/img/images/img-1.jpg" alt="Image 1">
-                                    <div class="caption-content">
-                                        <h3>Caption 2</h3>
-                                        <p>This is the caption for image 2.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <!-- item 8 -->
-                                <div class="caption">
-                                    <img src="Resource/img/images/img-1.jpg" alt="Image 1">
-                                    <div class="caption-content">
-                                        <h3>Caption 2</h3>
-                                        <p>This is the caption for image 2.</p>
-                                    </div>
-                                </div>
-                                <!-- Add more slides as needed -->
-                            </div>
+                            </c:forEach>
+                            
                         </div>
                         <!-- End: Comics carousel -->
                     </div>
@@ -136,23 +68,39 @@
                 </div>
                 <div class="comic-grid col-md-12 mx-auto">
 	                <div class="row">
-					        <c:forEach var="i" begin="0" end="19">
-
-					        <div class="grid-item col-3">
-					        	<div class="caption">
-				                    <img src="Resource/img/images/001.jpg" alt="">
-				                    <div class="caption-content">
-				                        <h3>Caption ${i * numCols + j + 1}</h3>
-				                        <p>This is the caption for image ${i * numCols + j + 1}.</p>
-				                     </div>
-			                    </div>
-			                </div>   
+					        <c:forEach var="i" items ="${listStory}" >
+						        <div class="grid-item col-3">
+						        	<div class="caption">
+					                    <img src="${i.getCover()}" alt="">
+					                    <div class="caption-content">
+					                        <h3>${i.getTitle()}</h3>
+					                        <p>${i.getRating()}</p>
+					                     </div>
+				                    </div>
+				                </div>   
 					        </c:forEach>
 				    </div>
 				</div>
             </div>
         </div>
+		<ul class="pagination mt-32">
+                <li class="pagination-item">
+                    <a href="home?index=${indexPage > 1?indexPage-1:"1"}" class="pagination-item_link">
+                        <i class="pagination-item_icon fa-solid fa-angle-left"></i>
+                    </a>
+                </li>
+                <c:forEach var="i" begin="1" end="${endPage}">
+	                <li class="pagination-item ${indexPage == i?"pagination-item--active":" "}">
+	                    <a href="home?index=${i}" class="pagination-item_link">${i}</a>
+	                </li>
+               	</c:forEach>
 
+                <li class="pagination-item">
+                    <a href="home?index=${indexPage + 1}" class="pagination-item_link">
+                        <i class="pagination-item_icon fa-solid fa-angle-right"></i>
+                    </a>
+                </li>
+            </ul>
         <%@include file="footer.jsp" %>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
