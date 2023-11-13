@@ -21,13 +21,14 @@
                         <img src="Resource/img/images/img-onepiece.jpg" class="card-img-top" alt="...">
                     </div>
                 </div>
+                <form action="#" method="post" enctype="multipart/form-data">
                 <div class="col-8">
                     <div class="mb-1 align-items-center row ">
                         <div class="col-3">
                             <label for="inputStoryname" class="intro-sn col-form-label">Tên truyện</label>
                         </div>
                         <div class="col-9 col-sm-9">
-                          <input type="text" class="form-control" id="inputStoryname">
+                          <input name="name_story" type="text" class="form-control" id="inputStoryname">
                         </div>
                     </div>
                     <div class=" mb-1 align-items-center row">
@@ -35,18 +36,19 @@
                             <label for="inputAuthor" class="col-form-label">Tác giả</label>
                         </div>
                         <div class="col-9 col-sm-9">
-                            <input type="text" class="form-control" id="inputAuthor">
+                            <input name="author" type="text" class="form-control" id="inputAuthor">
                         </div>
                     </div>
                     <div class="mb-1">
                         <label for="inputTag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="inputTag" placeholder="Action - Fantasy - Manhua - Shounen">
+                        <input name="tag_name" type="text" class="form-control" id="inputTag" placeholder="Action - Fantasy - Manhua - Shounen">
                     </div>
                     <div class="mb-1">
                         <p>Nội dung</p>
                         <textarea class="form-control mt-8" id="exampleFormControlTextarea1" rows="5"></textarea>
                     </div>
                 </div>
+                </form>
             </div>
             <div class="upload-chapter">
                 <div class="list-chapter" id="nt_listchapter">

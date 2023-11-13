@@ -15,14 +15,27 @@
                         <img src="Resource/img/Icon.png" alt="" class="header-logo-image">
                         <a href="home" class="header-logo-content">ANIMEWORLD</a>
                     </div>
-                    <ul class="header-account">
-                        <li class="account-item">
-                            <a id="Login" class="account-item-link" href="login.html">Login</a>
-                        </li>
-                        <li class="account-item">
-                            <a id="Sign-up" class="account-item-link" href="signup.html">Sign up</a>
-                        </li>
-                    </ul>
+                    <% 
+                    HttpSession s = request.getSession();
+                    Object msg = s.getAttribute("msg");
+                    Object username = s.getAttribute("username");
+                    System.out.print(msg);
+                    if (msg == null){ %>
+	                    <ul class="header-account">
+	                        <li class="account-item">
+	                            <a id="Login" class="account-item-link" href="login.jsp">Login</a>
+	                        </li>
+	                        <li class="account-item">
+	                            <a id="Sign-up" class="account-item-link" href="signup.jsp">Sign up</a>
+	                        </li>
+	                    </ul>
+	                 <%} else if(msg.equals("signin")){ %>
+	                 	<div class="">
+	                 		<i class="fa-duotone fa-circle-user"></i>
+	                 		<%= username %>
+	                 	</div>
+	                 	
+	                 <%} %>
                 </div>
             </div>
             <div id="header-bot">
