@@ -29,22 +29,22 @@
             <div class="login rounded">
                 <!-- Begin: login -->
                 
-                <form class="login-form">
+                <form action="login" method="post" class="login-form">
                     <!-- Begin-login-form -->
                     <h2 class="login-title">
                         Đăng nhập
                     </h2>
                     <label class="form-Username " for="Username">Tài khoản</label>
-                    <input type="text" class="form-control mt-8" id="Username">
+                    <input name="username" type="text" class="form-control mt-8" id="Username">
                     <label class="form-Password mt-16" for="Password">Mật khẩu</label>
-                    <input type="password" class="form-control mt-8" id="Password">
+                    <input name="password" type="password" class="form-control mt-8" id="Password">
                     <div class="login-help mt-16">
-                        <a href="url">Quên mật khẩu</a> /
-                        <a href="url">Đăng kí</a>
+                        <a href="#">Quên mật khẩu</a> /
+                        <a href="signup.jsp">Đăng kí</a>
                     </div>
                     <div class="login-button text-center">
                         <!-- Begin-login-button -->
-                        <button type="Login" class="btn btn-primary">Đăng nhập</button>
+                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
                     </div>
                     <!-- End-login-button -->
                 </form>

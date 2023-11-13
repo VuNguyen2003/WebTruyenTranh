@@ -1,6 +1,5 @@
 package DTO;
 import java.io.Serializable;
-import java.sql.Date;
 
 @SuppressWarnings("serial")
 public class User implements Serializable{
@@ -9,13 +8,13 @@ public class User implements Serializable{
 	private String Username;
 	private String Password;
 	private String Fullname;
-	private Date Birthdate;
+	private String Birthdate;
 	private String PhoneNumber;
 	private String Email;
 	private String HomeAddress;
 	
 	public User() {}
-	public User(int UserID, int PerID, String Username, String Password, String Fullname, Date Birthdate, String PhoneNumber, String Email, String HomeAddress) {
+	public User(int UserID, int PerID, String Username, String Password, String Fullname, String Birthdate, String PhoneNumber, String Email, String HomeAddress) {
 		this.UserID = UserID;
 		this.PerID = PerID;
 		this.Username = Username;
@@ -77,11 +76,11 @@ public class User implements Serializable{
 	}
 	
 	
-	public Date getBirthdate() {
+	public String getBirthdate() {
 		return Birthdate;
 	}
 	
-	public void setBirthdate(Date Birthdate) {
+	public void setBirthdate(String Birthdate) {
 		this.Birthdate = Birthdate;
 	}
 	
