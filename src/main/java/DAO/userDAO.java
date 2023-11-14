@@ -32,7 +32,7 @@ public class userDAO {
 			preparedStmt.setString(8,user.getEmail());
 			preparedStmt.setString(9,user.getHomeAddress());
 			System.out.println(sql);
-			preparedStmt.executeUpdate();
+			preparedStmt.execute();
 			
 	    }
 		catch (Exception e){
