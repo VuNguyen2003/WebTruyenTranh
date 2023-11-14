@@ -86,8 +86,8 @@ public class storyDAO {
 			conn = ConnectionClass.initializeDatabase();
 		String sql = "Select * from STORY Where TITLE like %?% LIMIT 20 OFFSET ? ";
 		PreparedStatement pstm = conn.prepareStatement(sql);
-		pstm.setString(2,nameStory);
-		pstm.setInt(1,indexPage);
+		pstm.setString(1,nameStory);
+		pstm.setInt(2,indexPage);
 		ResultSet rs = pstm.executeQuery();
 		while (rs.next()) {
 			int storyId = rs.getInt("STORYID");
