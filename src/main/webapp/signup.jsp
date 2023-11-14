@@ -25,7 +25,7 @@
             <!-- End: RE-USE padding-top-login-form -->
             <div class="sign-up rounded">
                 <!-- Begin: sign-up -->
-                <form action="signup" method="post" class="sign-up-form">
+                <form action="signup" method="post" class="sign-up-form" onsubmit="return validateForm()">
                     <h2 class="sign-up-title">
                         Đăng kí
                     </h2>
