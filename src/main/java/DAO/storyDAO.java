@@ -84,9 +84,9 @@ public class storyDAO {
 		ArrayList<Story> list = new ArrayList<Story>();
 		if(conn == null)
 			conn = ConnectionClass.initializeDatabase();
-		String sql = "Select * from STORY Where TITLE like %?% LIMIT 20 OFFSET ? ";
+		String sql = "Select * from STORY Where TITLE like ? LIMIT 20 OFFSET ? ";
 		PreparedStatement pstm = conn.prepareStatement(sql);
-		pstm.setString(1,nameStory);
+		pstm.setString(1,"%" + nameStory + "%");
 		pstm.setInt(2,indexPage);
 		ResultSet rs = pstm.executeQuery();
 		while (rs.next()) {
@@ -126,9 +126,9 @@ public class storyDAO {
 		if(conn == null)
 			conn = ConnectionClass.initializeDatabase();
 		int NumbPage = 0;
-		String sql = "Select count(*) from STORY where TITLE like %?%";
+		String sql = "Select count(*) from STORY where TITLE like ?";
 		PreparedStatement pstm = conn.prepareStatement(sql);
-		pstm.setString(1,nameStory);
+		pstm.setString(1,"%" + nameStory + "%");
 		ResultSet rs = pstm.executeQuery();
 		while(rs.next())
 			NumbPage = rs.getInt(1);
