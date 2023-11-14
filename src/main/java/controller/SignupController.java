@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -48,7 +49,8 @@ public class SignupController extends HttpServlet {
 			}
 			else {
 				User newUser = new User();
-				newUser.setUserID(1);
+				userDAO u = new userDAO();
+				newUser.setUserID(u.getCount() + 1);
 				newUser.setPerID(1);
 				newUser.setUsername(username);
 				newUser.setPassword(password);
@@ -57,9 +59,12 @@ public class SignupController extends HttpServlet {
 				newUser.setPhoneNumber("");
 				newUser.setEmail(email);
 				newUser.setHomeAddress("");
-				
-				userDAO u = new userDAO();
 				u.insertUser(newUser);
+				String path = "Resource/data/user/" + username;
+				File directory = new File(path);
+				if (!directory.exists()) {
+					directory.mkdir();
+				}
 				System.out.println("Đăng ký thành công");
 				request.setAttribute("alertMsg", "Đăng ký thành công");
 				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");

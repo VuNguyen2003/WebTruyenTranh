@@ -86,3 +86,7 @@ body {
 .pull-right {
     float: right !important;
 }
+
+.mrb-6 {
+    margin-bottom: 6px !important;
+}
