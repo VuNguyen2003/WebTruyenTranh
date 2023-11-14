@@ -10,7 +10,6 @@ import DTO.User;
 
 public class userDAO {
 	Connection conn = null;
-	PreparedStatement preparedStmt = null;
 	
 	//insert data
 	public void insertUser(User user) throws ClassNotFoundException, SQLException, ParseException {
@@ -20,9 +19,9 @@ public class userDAO {
 		try
 	    {
 			String sql = "INSERT INTO user(USERID, PERID, USERNAME, PASSWORD, FULLNAME, BIRTHDATE, PHONENUMBER, EMAIL, HOMEADDRESS) VALUES(?,?,?,?,?,?,?,?,?);";
-			preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
 			//thay thế biến thành dữ liệu đầu vào
-			preparedStmt.setInt(1,user.getUserID());
+			preparedStmt.setInt(1,this.getCount()+1);
 			preparedStmt.setInt(2,user.getPerID());
 			preparedStmt.setString(3,user.getUsername());
 			preparedStmt.setString(4,user.getPassword());
@@ -32,8 +31,11 @@ public class userDAO {
 			preparedStmt.setString(8,user.getEmail());
 			preparedStmt.setString(9,user.getHomeAddress());
 			System.out.println(sql);
+			System.out.println(this.getCount());	
 			preparedStmt.executeUpdate();
 			
+			if(preparedStmt.executeUpdate() > 0)
+				System.out.println("insert success");
 	    }
 		catch (Exception e){
 			
@@ -51,8 +53,8 @@ public class userDAO {
 		ArrayList<User> list = new ArrayList<User>();
 		//câu truy vấn
 		String sql = "Select * from User";
-		PreparedStatement preparedStmt = conn.prepareStatement(sql);
-		ResultSet rs = preparedStmt.executeQuery();
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
 		//lấy cơ sở dữ liệu vào lớp Story
 		while (rs.next()) {
 			count++;
