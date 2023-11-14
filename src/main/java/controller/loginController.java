@@ -39,7 +39,7 @@ public class loginController extends HttpServlet {
 				s.setAttribute("msg", "signin");
 				s.setAttribute("username", username);
 				s.setMaxInactiveInterval(60*60);
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("home").forward(request, response);
 				
 			}
 			else System.out.println("tài khoản không tồn tại");
