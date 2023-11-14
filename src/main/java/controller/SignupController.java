@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -19,55 +20,63 @@ import DTO.User;
 /**
  * Servlet implementation class SignupController
  */
-@WebServlet(urlPatterns = {"/signup"})
+@WebServlet(urlPatterns = { "/signup" })
 public class SignupController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
-    public SignupController() {
-        super();
-    }
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	public SignupController() {
+		super();
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String passwordcf = request.getParameter("password-confirm");
 		try {
-			response.setContentType("text/html"); 
+			response.setContentType("text/html");
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
-			if(!password.equals(passwordcf)) {
+			if (!password.equals(passwordcf)) {
 				System.out.println("Đăng ký thất bại");
 				request.setAttribute("alertMsg", "");
 				request.getRequestDispatcher("signup.jsp").include(request, response);
-			}
-			else {
+			} else {
 				User newUser = new User();
-				newUser.setUserID(1);
-				newUser.setPerID(1);
+				userDAO u = new userDAO();
+
+				newUser.setUserID(u.getCount() + 1);
+				newUser.setPerID(3);
 				newUser.setUsername(username);
 				newUser.setPassword(password);
-				newUser.setFullname("") ;
+				newUser.setFullname("");
 				newUser.setBirthdate("");
 				newUser.setPhoneNumber("");
 				newUser.setEmail(email);
 				newUser.setHomeAddress("");
-				
-				userDAO u = new userDAO();
+
+				// Create a directory for the user
+				String path = "Resource/data/user/" + username;
+				File directory = new File(path);
+				if (!directory.exists()) {
+					directory.mkdir();
+				}
+
 				u.insertUser(newUser);
 				System.out.println("Đăng ký thành công");
 				request.setAttribute("alertMsg", "Đăng ký thành công");
 				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-				rd.forward(request,response);
+				rd.forward(request, response);
 			}
-		}
-		catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 	}
 }

@@ -18,7 +18,7 @@
             <div class="row mt-32 upload">
                 <div class="col-4">
                     <div class="card upload-img ">
-                        <img src="Resource/img/images/img-onepiece.jpg" class="card-img-top" alt="...">
+                        <img id="uploaded-image" src="${fileName != null ? 'Resource/data/user/' + fileName : 'Resource/img/upload-default.png'}" class="card-img-top" alt="...">
                     </div>
                 </div>
                 <form action="#" method="post" enctype="multipart/form-data">
@@ -40,8 +40,49 @@
                         </div>
                     </div>
                     <div class="mb-1">
-                        <label for="inputTag" class="form-label">Tag</label>
-                        <input name="tag_name" type="text" class="form-control" id="inputTag" placeholder="Action - Fantasy - Manhua - Shounen">
+                        <form action="" method="get">
+                            <div>
+                                <label class="mrb-6" for="category">Tag</label>
+                                <select name="tag" id="tag" multiple>
+                                    <option value="1">Action</option>
+                                    <option value="2">Adult</option>
+                                    <option value="3">Adventure</option>
+                                    <option value="4">Chuyển sinh</option>
+                                    <option value="5">Comedy</option>
+                                    <option value="6">Cooking</option>
+                                    <option value="7">Cổ Đại</option>
+                                    <option value="8">Doujinshi</option>
+                                    <option value="9">Drama</option>
+                                    <option value="10">Fantasy</option>
+                                    <option value="11">Gender Bender</option>
+                                    <option value="12">Harem</option>
+                                    <option value="13">Horror</option>
+                                    <option value="14">Lịch sử</option>
+                                    <option value="15">Live Action</option>
+                                    <option value="16">Josei</option>
+                                    <option value="17">Mecha</option>
+                                    <option value="18">Mystery</option>
+                                    <option value="19">Ngôn tình</option>
+                                    <option value="20">Romance</option>
+                                    <option value="21">School life</option>
+                                    <option value="22">Sci-fi</option>
+                                    <option value="23">Seinen</option>
+                                    <option value="24">Shoujo</option>
+                                    <option value="25">Slice of life</option>
+                                    <option value="26">Sports</option>
+                                    <option value="27">Supernatural</option>
+                                    <option value="28">Tragedy</option>
+                                    <option value="29">Trinh thám</option>
+                                    <option value="30">Truyện màu</option>
+                                    <option value="31">Shounen</option>
+                                    <option value="32">Yaoi</option>
+                                    <option value="33">Yuri</option>
+                                    <option value="34">Xuyên không</option>
+                                    <option value="35">16+</option>
+                                    <option value="36">18+</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
                     <div class="mb-1">
                         <p>Nội dung</p>
