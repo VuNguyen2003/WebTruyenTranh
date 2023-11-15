@@ -119,30 +119,9 @@
                 </div>
             </div>
         </div>
-		<%
 		
-            
-		  // Lấy số rating từ yêu cầu AJAX
-		  int rating = Integer.parseInt(request.getParameter("rating"));
-		  // Kết nối đến cơ sở dữ liệu
-		  String dbDriver = "com.mysql.cj.jdbc.Driver";
-	      String dbURL = "jdbc:mysql:// localhost:3306/";
-	      // Database name to access
-	      String dbName = "storydb";
-	      String dbUsername = "root";
-	      String dbPassword = "03022003";
-		  Connection conn = DriverManager.getConnection(dbURL + dbName,
-                  dbUsername, 
-                  dbPassword);
-		  // Thêm số rating vào cơ sở dữ liệu
-		  String sql = "INSERT INTO ratings VALUES (?,?,?)";
-		  PreparedStatement stmt = conn.prepareStatement(sql);
-		  stmt.setInt(3, rating);
-		  stmt.executeUpdate();
-		  // Đóng kết nối
-		  conn.close();
-		%>
         <%@include file="footer.jsp" %>
     <script src="Resource/js/script.js"></script>
+    
 </body>
 </html>
