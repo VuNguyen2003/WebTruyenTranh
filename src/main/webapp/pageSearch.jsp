@@ -23,11 +23,13 @@
 				<c:forEach var="i" items ="${listStory}" >
 					<div class="grid-item col-3">
 						<div class="caption">
+							<a href="viewintro?id=${i.getStoryId()}">
 							<img src="${i.cover}" alt="">
 							<div class="caption-content">
 								<h3>${i.title}</h3>
 								<p>${i.rating}</p>
 							</div>
+							</a>
 						</div>
 					</div>   
 				</c:forEach>
