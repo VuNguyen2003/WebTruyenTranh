@@ -46,5 +46,6 @@
             </div>
             <!-- End: sign-up -->
 <%@include file="footer.jsp" %>
+	
 </body>
 </html>

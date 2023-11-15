@@ -31,7 +31,6 @@ public class userDAO {
 			preparedStmt.setString(8,user.getEmail());
 			preparedStmt.setString(9,user.getHomeAddress());
 
-			System.out.println(this.getCount());
 			preparedStmt.executeUpdate();
 			System.out.println("insert success");
 			if(preparedStmt.executeUpdate() > 0)
@@ -133,10 +132,35 @@ public class userDAO {
 		}
 		return false;
 	}
+	
+	public void updateUser(int userid, User ud) throws ClassNotFoundException, SQLException, ParseException {
+		if(conn == null) {
+			conn = ConnectionClass.initializeDatabase();
+		}
+		try {
+			String sql = "UPDATE user SET USERNAME=?, PASSWORD=?, FULLNAME=?, BIRTHDATE=?, PHONENUMBER=?, EMAIL=?, HOMEADDRESS=? where USERID=?;";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1,ud.getUsername());
+			ps.setString(2,ud.getPassword());
+			ps.setString(3,ud.getFullname());
+			ps.setString(4,ud.getBirthdate());
+			ps.setString(5,ud.getPhoneNumber());
+			ps.setString(6,ud.getEmail());
+			ps.setString(7,ud.getHomeAddress());
+			ps.setInt(8,userid);
+			
+			int rs = ps.executeUpdate();
+			if(rs>0) {
+				System.out.println("UPDATE thành công!");
+			}
+		}catch(Exception e) {
+			
+		}
+	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
         userDAO u = new userDAO();
-        System.out.println(u.getCount());
+        
         
     }
 }
