@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.userDAO;
+import DTO.User;
 
 @WebServlet("/login")
 public class loginController extends HttpServlet {
@@ -29,23 +32,19 @@ public class loginController extends HttpServlet {
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println(username + password);
 		
 		try {
+			User user = ud.getUser(username, password);
 			if(ud.checkExitAccount(username, password)) {
 				HttpSession s = request.getSession();
-				s.setAttribute("msg", "signin");
-				s.setAttribute("username", username);
-				s.setMaxInactiveInterval(60*60);
-				request.getRequestDispatcher("home").forward(request, response);
-				
+				s.setAttribute("mem",user);
+				s.setAttribute("msg","signin");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 			else System.out.println("tài khoản không tồn tại");
-		} catch (ClassNotFoundException | SQLException e) {
-			System.out.println("Không thể render data");
-		}
-		
-		
+		} catch (ClassNotFoundException | SQLException | ParseException e) {
+			e.printStackTrace();
+		}		
 	}
 
 }
