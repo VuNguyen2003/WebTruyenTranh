@@ -1,10 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,11 +15,11 @@ import DTO.User;
 /**
  * Servlet implementation class SignupController
  */
-@WebServlet(urlPatterns = {"/signup"})
-public class SignupController extends HttpServlet {
+@WebServlet("/signup")
+public class signupController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-    public SignupController() {
+    public signupController() {
         super();
     }
     
@@ -37,13 +33,12 @@ public class SignupController extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String passwordcf = request.getParameter("password-confirm");
+		
 		try {
 			response.setContentType("text/html"); 
 			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
 			if(!password.equals(passwordcf)) {
 				System.out.println("Đăng ký thất bại");
-				request.setAttribute("alertMsg", "");
 				request.getRequestDispatcher("signup.jsp").include(request, response);
 			}
 			else {
@@ -53,15 +48,14 @@ public class SignupController extends HttpServlet {
 				newUser.setUsername(username);
 				newUser.setPassword(password);
 				newUser.setFullname("") ;
-				newUser.setBirthdate("");
+				newUser.setBirthdate(null);
 				newUser.setPhoneNumber("");
 				newUser.setEmail(email);
 				newUser.setHomeAddress("");
-				
 				userDAO u = new userDAO();
+				System.out.println(u.getCount());
 				u.insertUser(newUser);
-				System.out.println("Đăng ký thành công");
-				request.setAttribute("alertMsg", "Đăng ký thành công");
+				
 				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 				rd.forward(request,response);
 			}

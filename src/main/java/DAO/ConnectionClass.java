@@ -11,7 +11,7 @@ public class ConnectionClass {
 	        // Initialize all the information regarding
 	        // Database Connection
 	        String dbDriver = "com.mysql.cj.jdbc.Driver";
-	        String dbURL = "jdbc:mysql:// localhost:3306/";
+	        String dbURL = "jdbc:mysql://localhost:3306/";
 	        // Database name to access
 	        String dbName = "storydb";
 	        String dbUsername = "root";

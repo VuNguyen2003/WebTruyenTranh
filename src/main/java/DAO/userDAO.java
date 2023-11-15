@@ -19,7 +19,7 @@ public class userDAO {
 		try
 	    {
 			String sql = "INSERT INTO user(USERID, PERID, USERNAME, PASSWORD, FULLNAME, BIRTHDATE, PHONENUMBER, EMAIL, HOMEADDRESS) VALUES(?,?,?,?,?,?,?,?,?);";
-			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+			PreparedStatement preparedStmt = conn.prepareStatement(sql);
 			//thay thế biến thành dữ liệu đầu vào
 			preparedStmt.setInt(1,this.getCount()+1);
 			preparedStmt.setInt(2,user.getPerID());
@@ -30,10 +30,10 @@ public class userDAO {
 			preparedStmt.setString(7,user.getPhoneNumber());
 			preparedStmt.setString(8,user.getEmail());
 			preparedStmt.setString(9,user.getHomeAddress());
-			System.out.println(sql);
-			System.out.println(this.getCount());	
+
+			System.out.println(this.getCount());
 			preparedStmt.executeUpdate();
-			
+			System.out.println("insert success");
 			if(preparedStmt.executeUpdate() > 0)
 				System.out.println("insert success");
 	    }
@@ -63,7 +63,7 @@ public class userDAO {
 			String userName = rs.getString("USERNAME");
 			String passWord = rs.getString("PASSWORD");
 			String fullName = rs.getString("FULLNAME");
-			String birthDay = rs.getDate("BIRTHDATE").toString();
+			String birthDay = rs.getString("BIRTHDATE");
 			String phoneNumber = rs.getString("PHONENUMBER");
 			String email = rs.getString("EMAIL");
 			String homeaddress = rs.getString("HOMEADDRESS");
@@ -84,6 +84,34 @@ public class userDAO {
 		return list;
 	}
 	
+	public User getUser(String username, String password) throws ClassNotFoundException, SQLException, ParseException {
+		if(conn == null) {
+			conn = ConnectionClass.initializeDatabase();
+		}
+		try
+	    {
+			String sql = "SELECT * FROM user WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "';";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getInt("USERID"));
+				user.setPerID(rs.getInt("PERID"));
+				user.setUsername(rs.getString("USERNAME"));
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setFullname(rs.getString("FULLNAME"));
+				user.setBirthdate(rs.getString("BIRTHDATE"));
+				user.setPhoneNumber(rs.getString("PHONENUMBER"));				
+				user.setEmail(rs.getString("EMAIL"));
+				user.setHomeAddress(rs.getString("HOMEADDRESS"));
+				return user;
+			}
+		}catch(Exception e) {
+			e.getStackTrace();
+		}
+		return null;
+	}
+	
 	public int getCount() throws ClassNotFoundException, SQLException, ParseException {
 		return this.getUsers().size();
 	}
@@ -96,7 +124,7 @@ public class userDAO {
 			String sql = "SELECT * FROM user WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "';";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
+			if(rs.next()) {
 				System.out.println("Tài khoản tồn tại!");
 				return true;
 			}
@@ -105,4 +133,10 @@ public class userDAO {
 		}
 		return false;
 	}
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
+        userDAO u = new userDAO();
+        System.out.println(u.getCount());
+        
+    }
 }

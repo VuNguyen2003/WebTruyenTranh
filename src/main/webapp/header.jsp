@@ -17,24 +17,26 @@
                     </div>
                     <% 
                     HttpSession s = request.getSession();
+                    Object user = s.getAttribute("mem");
                     Object msg = s.getAttribute("msg");
-                    Object username = s.getAttribute("username");
-                    System.out.print(msg);
-                    if (msg == null){ %>
+                    if (msg != null){ %>
 	                    <ul class="header-account">
+	                        <li class="account-item">
+	                            <a class="mr-3" href= "per-info.jsp"><i class="fa-regular fa-id-card"></i>${ mem.getUsername()}</i></a>
+	                        </li>
+	                        <li class="account-item">
+	                            <a id="Sign-up" class="account-item-link" href="logout">Log out</a>
+	                        </li>
+	                    </ul>
+	                 <%} else { %>
+	                 	<ul class="header-account">
 	                        <li class="account-item">
 	                            <a id="Login" class="account-item-link" href="login.jsp">Login</a>
 	                        </li>
 	                        <li class="account-item">
 	                            <a id="Sign-up" class="account-item-link" href="signup.jsp">Sign up</a>
 	                        </li>
-	                    </ul>
-	                 <%} else if(msg.equals("signin")){ %>
-	                 	<div class="">
-	                 		<i class="fa-duotone fa-circle-user"></i>
-	                 		<%= username %>
-	                 	</div>
-	                 	
+	                    </ul>	                                	
 	                 <%} %>
                 </div>
             </div>
