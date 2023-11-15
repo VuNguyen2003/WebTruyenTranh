@@ -24,21 +24,26 @@ public class storyDAO {
 		}
 		try
 	    {
-			String sql = "INSERT INTO STORY(STORYID, TITLE, UPLOADDATE, LIKES, COMMENTS, REPORTS, RATING, COVER) VALUES (?,?,?,?,?,?,?,?)";
+			Calendar calendar = Calendar.getInstance();
+			java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
+			
+			String sql = "INSERT INTO STORY(STORYID, TITLE, UPLOADDATE, RATING, COVER, FAVORITE, AUTHOR, SUMMARY, STATUS) VALUES (?,?,?,?,?,?,?,?,?)";
 			preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
 			//thay thế biến thành dữ liệu đầu vào
 			preparedStmt.setInt(1,story.getStoryId());
 			preparedStmt.setString(2,story.getTitle());
-			Calendar calendar = Calendar.getInstance();
-			java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
 			preparedStmt.setDate(3,date);
-			preparedStmt.setFloat(7,story.getRating());
-			preparedStmt.setString(8,story.getCover());
+			preparedStmt.setFloat(4,story.getRating());
+			preparedStmt.setString(5,story.getCover());
+			preparedStmt.setInt(6,story.getFavorite());
+			preparedStmt.setString(7,story.getAuthor());
+			preparedStmt.setString(8,story.getSummary());
+			preparedStmt.setString(9,story.getStatus());
 			preparedStmt.execute();
 			System.out.println(sql);
 	    }
 		catch (Exception e){
-			
+			e.printStackTrace();
 		}
 	}
 	
