@@ -54,12 +54,14 @@
 	                    <div id="myForm" class="clearfix  mt-16 row">
 	                        <c:forEach var="i" items ="${listtag}" >
 		                        <div class="col-3">
+		                        	
 		                            <div class="form-check">
 		                                <input class="form-check-input" type="checkbox" name="tags" value="${i.tagId}" id="flexCheckDefault">
 		                                <label class="form-check-label" for="flexCheckDefault">
 		                                  ${i.tagName}
 		                                </label>
 		                            </div>
+		                            
 		                        </div>
 	                        </c:forEach>    
 	                    </div>
