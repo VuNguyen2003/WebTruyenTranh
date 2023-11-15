@@ -28,7 +28,7 @@
             <!-- End: padding-top-login-form -->
             <div class="login rounded">
                 <!-- Begin: login -->
-                
+              <div>  
                 <form action="login" method="post" class="login-form">
                     <!-- Begin-login-form -->
                     <h2 class="login-title">
