@@ -10,17 +10,22 @@ public class Story implements Serializable{
     private float rating;
     private String cover;
     private int favorite;
-    
+    private String author;
+    private String summary;
+    private String status;
     public Story() {
     }
 
-    public Story(int storyId, String title, String uploadDate, float rating, String cover, int favorite) {
+    public Story(int storyId, String title, String uploadDate, float rating, String cover, int favorite, String author, String summary, String status) {
         this.storyId = storyId;
         this.title = title;
         this.uploadDate = uploadDate;
         this.rating = rating;
         this.cover = cover;
         this.favorite = favorite;
+        this.author = author;
+        this.summary = summary;
+        this.status = status;
     }
 
     
@@ -70,5 +75,29 @@ public class Story implements Serializable{
     
     public void setFavorite(int favorite) {
     	this.favorite = favorite;
+    }
+    
+    public String getAuthor() {
+    	return author;
+    }
+    
+    public void setAuthor(String author) {
+    	this.author = author;
+    }
+    
+    public String getSummary() {
+    	return summary;
+    }
+    
+    public void setSummary(String summary) {
+    	this.summary = summary;
+    }
+    
+    public String getStatus() {
+    	return status;
+    }
+    
+    public void setStatus(String status) {
+    	this.status = status;
     }
 }

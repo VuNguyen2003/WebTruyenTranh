@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" integrity="sha512-IJEbgDEF7OeKJRa0MY2PApnyJHRIsgzCveek4ec8VWQ+7KG3ZSKVNYa5xP/Gh0hVP0Mwb+gBsk+GwR3JQGhQNg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <link rel="stylesheet" href="./assets/fonts/themify-icons-font/themify-icons/themify-icons.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
 </head>
 <body>
 <%@include file="header.jsp" %>
@@ -24,7 +25,7 @@
                         <img id="uploaded-image" src="${fileName != null ? 'Resource/data/user/' + fileName : 'Resource/img/upload-default.png'}" class="card-img-top" alt="...">
                     </div>
                 </div>
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="uploadController" method="post" enctype="multipart/form-data">
                 <div class="col-8">
                     <div class="mb-1 align-items-center row ">
                         <div class="col-3">
@@ -80,6 +81,12 @@
                 </div>
             </div>
         </div>
+        
+        
         <%@include file="footer.jsp" %>
+        <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.0/dist/js/multi-select-tag.js"></script>
+        <script>
+        new MultiSelectTag('tag')  // id
+    	</script>
 </body>
 </html>

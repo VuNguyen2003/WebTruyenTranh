@@ -255,6 +255,38 @@ public class storyDAO {
         return countPage;
     }
     
+    public Story introStory(int ID)  throws ClassNotFoundException, SQLException, ParseException{
+    	Story story = new Story();
+    	if(conn == null)
+			conn = ConnectionClass.initializeDatabase();
+		String sql = "Select * from STORY where STORYID like ?";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setInt(1,ID);
+		ResultSet rs = pstm.executeQuery();
+		while(rs.next()) {
+			int storyId = rs.getInt("STORYID");
+			String title = rs.getString("TITLE");
+			Date uploadDate = rs.getDate("UPLOADDATE");
+			//format lại ngày tháng thành kiểu string "ngày/tháng/năm"
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			String strDate = dateFormat.format(uploadDate);
+			float rating = rs.getFloat("RATING");
+			String cover = rs.getString("COVER");
+			String author = rs.getString("AUTHOR");
+			String summary = rs.getString("SUMMARY");
+			String status = rs.getString("STATUS");
+			story.setStoryId(storyId);
+			story.setTitle(title);
+			story.setUploadDate(strDate);
+			story.setRating(rating);
+			story.setCover(cover);
+			story.setAuthor(author);
+			story.setSummary(summary);
+			story.setStatus(status);
+		}
+    	return story;
+    }
+    
 	public static void main(String args[]) throws ClassNotFoundException, SQLException, ParseException {
 		ArrayList<Story> results = new ArrayList<Story>();
 		storyDAO dao = new storyDAO();

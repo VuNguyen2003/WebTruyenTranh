@@ -24,7 +24,7 @@
             <div class="row mt-32 intro">
                 <div class="col-4 intro-img">
                     <div class="card upload-img ">
-                        <img src="Resource/img/images/img-onepiece.jpg" class="card-img-top" alt="...">
+                        <img src="${listStory.getCover()}" class="card-img-top" alt="...">
                     </div>
                 </div>
                 <div class="col-8 info">
@@ -33,7 +33,7 @@
                             <label for="inputStoryname" class="intro-sn col-form-label">Tên truyện</label>
                         </div>
                         <div class="col-9 col-sm-9">
-                          <input type="text" class="form-control" id="inputStoryname">
+                          <input type="text" class="form-control" id="inputStoryname" value = "${listStory.getTitle()}" disabled>
                         </div>
                     </div>
                     <div class=" mb-1 align-items-center row">
@@ -41,7 +41,7 @@
                             <label for="inputAuthor" class="col-form-label">Tác giả</label>
                         </div>
                         <div class="col-9 col-sm-9">
-                            <input type="text" class="form-control" id="inputAuthor">
+                            <input type="text" class="form-control" id="inputAuthor" value = "${listStory.getAuthor()}" disabled>
                         </div>
                     </div>
                     <div class="mb-1">
@@ -53,7 +53,7 @@
                             <label for="inputPassword6" class="col-form-label">Tình trạng</label>
                         </div>
                         <div class="col-9">
-                            <p> Đang tiến hành</p>
+                            <p> ${listStory.getStatus()}</p>
                         </div>
                     </div>
                     <div class="row g-2 align-items-center">
@@ -96,19 +96,7 @@
                         Nội dung
                     </h3>
                     <p>
-                        "One Piece xoay quanh 1 nhóm cướp biển được gọi là Băng Hải tặc Mũ Rơm - Straw Hat 
-                        Pirates - được thành lập và lãnh đạo bởi thuyền trưởng Monkey D. Luffy. Cậu bé Luffy 
-                        có ước mơ tìm thấy kho báu vĩ đại nhất, One Piece, của Vua Hải Tặc đời trước 
-                        Gold D. Roger và trở thành Vua Hải Tặc đời kế tiếp. Ở Việt Nam hiện nay, truyện đang
-                        được Nhà xuất bản Thanh Hóa xuất bản nhưng không có bản quyền, với tên gọi là 
-                        Đảo Hải tặc Cốt truyện: Monkey D. Luffy, 1 cậu bé rất thích hải tặc có ước mơ tìm 
-                        được kho báu One Piece và trở thành Vua hải tặc - Pirate King. Lúc nhỏ, Luffy tình 
-                        cờ ăn phải trái quỉ (Devil Fruit) Gomu Gomu, nó cho cơ thể cậu khả năng co dãn đàn
-                        hồi như cao su nhưng đổi lại cậu sẽ không bao giờ biết bơi. Sau đó Luffy lại được 
-                        Shank cứu thoát tuy nhiên ông ta bị mất 1 cánh tay. Sau đấy Shank chia tay Luffy
-                        và để lại cho cậu cái mũ rơm (Straw Hat) và nói rằng: "Sau này bao giờ thành cướp
-                        biển hãy gặp ta và trả lại nó". Chính lời nói này đã thúc đầy Luffy trở thành 1 
-                        cướp biển thật sự."
+                        ${listStory.getSummary()}
                     </p>
                     <a class="morelink less" href="#">
                         <i class="fa-solid fa-angle-left"></i>

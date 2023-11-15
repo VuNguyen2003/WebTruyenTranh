@@ -70,12 +70,14 @@
 	                <div class="row">
 					        <c:forEach var="i" items ="${listStory}" >
 						        <div class="grid-item col-3">
-						        	<div class="caption">
+						        	<div class="caption" >
+						        		<a href="viewintro?id=${i.getStoryId()}">
 					                    <img src="${i.getCover()}" alt="">
 					                    <div class="caption-content">
 					                        <h3>${i.getTitle()}</h3>
 					                        <p>${i.getRating()}</p>
 					                     </div>
+					                     </a>
 				                    </div>
 				                </div>   
 					        </c:forEach>
