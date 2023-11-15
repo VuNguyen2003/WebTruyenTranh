@@ -35,6 +35,7 @@ public class hashtagDAO {
 		return listTag;
 	}
 	
+	
 	public static void main(String args[]) throws ClassNotFoundException, SQLException, ParseException {
 		hashtagDAO dao = new hashtagDAO ();
 		ArrayList<Hashtag> i = new ArrayList<Hashtag>();

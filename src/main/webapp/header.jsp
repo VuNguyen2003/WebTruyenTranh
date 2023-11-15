@@ -52,7 +52,7 @@
                                 <li><a href="">FAVORITE</a></li>
                             </ul>
                         </li>
-                        <li><a href="upload.html">UPLOAD</a></li>
+                        <li><a href="upload.jsp">UPLOAD</a></li>
                         <li><a href="Policy.html">POLICY</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="per-info.html">SETTING</a></li>
