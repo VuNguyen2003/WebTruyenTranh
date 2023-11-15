@@ -16,11 +16,11 @@ import DTO.User;
 /**
  * Servlet implementation class SignupController
  */
-@WebServlet(urlPatterns = {"/signup"})
-public class SignupController extends HttpServlet {
+@WebServlet("/signup")
+public class signupController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-    public SignupController() {
+    public signupController() {
         super();
     }
     
@@ -34,13 +34,12 @@ public class SignupController extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String passwordcf = request.getParameter("password-confirm");
+		
 		try {
 			response.setContentType("text/html"); 
 			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
 			if(!password.equals(passwordcf)) {
 				System.out.println("Đăng ký thất bại");
-				request.setAttribute("alertMsg", "");
 				request.getRequestDispatcher("signup.jsp").include(request, response);
 			}
 			else {
@@ -51,7 +50,7 @@ public class SignupController extends HttpServlet {
 				newUser.setUsername(username);
 				newUser.setPassword(password);
 				newUser.setFullname("") ;
-				newUser.setBirthdate("");
+				newUser.setBirthdate(null);
 				newUser.setPhoneNumber("");
 				newUser.setEmail(email);
 				newUser.setHomeAddress("");

@@ -23,6 +23,7 @@
                 <div class="col-4">
                     <div class="card upload-img ">
                         <img id="uploaded-image" src="${fileName != null ? 'Resource/data/user/' + fileName : 'Resource/img/upload-default.png'}" class="card-img-top" alt="...">
+                        <input name="cover" type="file"/>
                     </div>
                 </div>
                 <form action="uploadController" method="post" enctype="multipart/form-data">
@@ -79,6 +80,9 @@
                             Thêm chương</a>
                     </div>
                 </div>
+            </div>
+            <div class="text-center">
+            	<button class="btn btn-primary">Đăng truyện</button>
             </div>
         </div>
         
