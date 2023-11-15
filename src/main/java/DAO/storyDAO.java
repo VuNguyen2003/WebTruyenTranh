@@ -122,12 +122,20 @@ public class storyDAO {
 			String strDate = dateFormat.format(uploadDate);
 			float rating = rs.getFloat("RATING");
 			String cover = rs.getString("COVER");
+			int favorite = rs.getInt("FAVORITE");
+			String author = rs.getString("AUTHOR");
+			String summary = rs.getString("SUMMARY");
+			String status = rs.getString("STATUS");
 			Story story = new Story();
 			story.setStoryId(storyId);
 			story.setTitle(title);
 			story.setUploadDate(strDate);
 			story.setRating(rating);
 			story.setCover(cover);
+			story.setFavorite(favorite);
+			story.setAuthor(author);
+			story.setSummary(summary);
+			story.setStatus(status);
 			//lưu lớp story vào list story
 			list.add(story);
 		}
