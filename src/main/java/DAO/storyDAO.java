@@ -17,7 +17,7 @@ public class storyDAO {
 	Connection conn = null;
 	PreparedStatement preparedStmt = null;
 	
-	//đưa cơ sở dữ liệu vào bảng story
+	// đưa dữ liệu vào bảng story
 	public void inputStory(Story story) throws ClassNotFoundException, SQLException, ParseException {
 		if(conn == null) {
 			conn = ConnectionClass.initializeDatabase();
@@ -42,6 +42,25 @@ public class storyDAO {
 			preparedStmt.execute();
 			System.out.println(sql);
 	    }
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	// đưa dữ liệu vào bảng hashtag
+	public void inputFind(Find find) throws ClassNotFoundException, SQLException, ParseException {
+		if(conn == null) {
+			conn = ConnectionClass.initializeDatabase();
+		}
+		try {
+			String sql = "INSERT INTO FIND(STORYID, TAGID)";
+			preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+			
+			preparedStmt.setInt(1,find.getStoryId());
+			preparedStmt.setInt(2,find.getTagId());
+			
+			preparedStmt.execute();
+		}
 		catch (Exception e){
 			e.printStackTrace();
 		}
