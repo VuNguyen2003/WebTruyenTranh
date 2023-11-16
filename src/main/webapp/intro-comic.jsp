@@ -122,6 +122,28 @@
 		
         <%@include file="footer.jsp" %>
     <script src="Resource/js/script.js"></script>
+    <%
+	    String rating = request.getParameter("rating");
+	    Connection conn = null;
+	    PreparedStatement stmt = null;
+	    try {
+	        Class.forName("com.mysql.jdbc.Driver");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ratings", "username", "password");
+	        stmt = conn.prepareStatement("INSERT INTO ratings (rating) VALUES (?)");
+	        stmt.setString(1, rating);
+	        stmt.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (stmt != null) {
+	            stmt.close();
+	        }
+	        if (conn != null) {
+	            conn.close();
+	        }
+	    }
+	    %>
+    
     
 </body>
 </html>
