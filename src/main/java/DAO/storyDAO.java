@@ -17,6 +17,21 @@ public class storyDAO {
 	Connection conn = null;
 	PreparedStatement preparedStmt = null;
 	
+	// get storyId tránh lặp khóa
+	public int getMaxStoryId() throws SQLException, ClassNotFoundException {
+	    int maxStoryId = 0;
+	    if(conn == null) {
+	        conn = ConnectionClass.initializeDatabase();
+	    }
+	    String sql = "SELECT MAX(STORYID) AS MAX_ID FROM STORY";
+	    preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+	    ResultSet rs = preparedStmt.executeQuery();
+	    if (rs.next()) {
+	        maxStoryId = rs.getInt("MAX_ID");
+	    }
+	    return maxStoryId;
+	}
+
 	// đưa dữ liệu vào bảng story
 	public void inputStory(Story story) throws ClassNotFoundException, SQLException, ParseException {
 		if(conn == null) {
@@ -53,7 +68,7 @@ public class storyDAO {
 			conn = ConnectionClass.initializeDatabase();
 		}
 		try {
-			String sql = "INSERT INTO FIND(STORYID, TAGID)";
+			String sql = "INSERT INTO FIND(STORYID, TAGID) VALUES (?,?)";
 			preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
 			
 			preparedStmt.setInt(1,find.getStoryId());

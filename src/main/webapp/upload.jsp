@@ -23,42 +23,42 @@
 	            <div class="row mt-32 upload">
 	                <div class="col-4">
 	                    <div class="card upload-img ">
-	                        <img id="uploaded-image" src="${fileName != null ? 'Resource/data/user/' + fileName : 'Resource/img/upload-default.png'}" class="card-img-top" alt="...">
-	                <input name="cover" type="file"/>
-	            </div>
-	        </div>
+	                        <img id="uploaded-image" src="Resource/img/upload-default.png" class="card-img-top" alt="...">
+		                <input name="cover" type="file"/>
+			            </div>
+			        </div>
 	        
-	        <div class="col-8">
-	            <div class="mb-1 align-items-center row ">
-	                <div class="col-3">
-	                    <label for="inputStoryname" class="intro-sn col-form-label">Tên truyện</label>
-	                </div>
-	                <div class="col-9 col-sm-9">
-	                  <input name="name_story" type="text" class="form-control" id="inputStoryname">
-	                </div>
-	            </div>
-	            <div class=" mb-1 align-items-center row">
-	                <div class="col-3">
-	                    <label for="inputAuthor" class="col-form-label">Tác giả</label>
-	                </div>
-	                <div class="col-9 col-sm-9">
-	                    <input name="author" type="text" class="form-control" id="inputAuthor">
-	                </div>
-	            </div>
-	            <div class="mb-1">
-	                <form action="" method="get">
-	                    <div>
-	                        <label class="mrb-6" for="category">Tag</label>
-	                            <%
-	                            hashtagDAO dao = new hashtagDAO();
-	                        	ArrayList<Hashtag> tags = new ArrayList<Hashtag>();
-	                        	tags = dao.getTag();
-	                        	%>
-	                            <select name="tag" id="tag" multiple>
-		    <% for (Hashtag tag : tags) { %>
-		        <option value="<%= tag.getTagId() %>"><%= tag.getTagName() %></option>
-		    <% } %>
-		</select>
+	        	<div class="col-8">
+		            <div class="mb-1 align-items-center row">
+		                <div class="col-3">
+		                    <label for="inputStoryname" class="intro-sn col-form-label">Tên truyện</label>
+		                </div>
+		                <div class="col-9 col-sm-9">
+		                  <input name="name_story" type="text" class="form-control" id="inputStoryname">
+		                </div>
+		            </div>
+		            <div class=" mb-1 align-items-center row">
+		                <div class="col-3">
+		                    <label for="inputAuthor" class="col-form-label">Tác giả</label>
+		                </div>
+		                <div class="col-9 col-sm-9">
+		                    <input name="author" type="text" class="form-control" id="inputAuthor">
+		                </div>
+		            </div>
+			            <div class="mb-1">
+			                <form action="" method="get">
+			                    <div>
+			                        <label class="mrb-6" for="category">Tag</label>
+		                            <%
+		                            hashtagDAO dao = new hashtagDAO();
+		                        	ArrayList<Hashtag> tags = new ArrayList<Hashtag>();
+		                        	tags = dao.getTag();
+		                        	%>
+		                            <select name="tag" id="tag" multiple>
+									    <% for (Hashtag tag : tags) { %>
+									        <option value="<%= tag.getTagId() %>"><%= tag.getTagName() %></option>
+									    <% } %>
+									</select>
 	                    </div>
 	                </form>
 	            </div>
@@ -86,7 +86,7 @@
 	    	<button class="btn btn-primary">Đăng truyện</button>
 	    </div>
 	</div>
-	        </form>        
+	</form>        
         
     <%@include file="footer.jsp" %>
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.0/dist/js/multi-select-tag.js"></script>

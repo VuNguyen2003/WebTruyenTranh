@@ -58,19 +58,27 @@ public class uploadController extends HttpServlet {
         
         // Create a new Story object
         Story story = new Story();
-        story.setTitle(storyName);
-        story.setAuthor(author);
-        story.setCover(fileName);
         
         // Save the Story object to the database
         storyDAO dao = new storyDAO();
+        
+        int maxStoryId = 0;
+        try {
+            maxStoryId = dao.getMaxStoryId();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        // storyId tự động tăng
+        story.setStoryId(maxStoryId + 1);
+        story.setTitle(storyName);
+        story.setAuthor(author);
+        // lưu đường dẫn của file ảnh
+        story.setCover(savePath + File.separator + fileName);
+        
+        
         try {
 			dao.inputStory(story);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
+		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			e.printStackTrace();
 		}
         
@@ -81,11 +89,7 @@ public class uploadController extends HttpServlet {
             find.setTagId(Integer.parseInt(tag));
             try {
 				dao.inputFind(find);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (ParseException e) {
+			} catch (ClassNotFoundException | SQLException | ParseException e) {
 				e.printStackTrace();
 			}
         }
