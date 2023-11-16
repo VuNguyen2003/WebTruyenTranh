@@ -29,22 +29,17 @@
      <div class="login rounded">
          <!-- Begin: login -->
          
-         <form action="login" method="post" class="login-form">
+         <form action="inputOTP" method="post" class="login-form">
              <!-- Begin-login-form -->
              <h2 class="login-title">
-                 Đăng nhập
+                 Nhập OTP
              </h2>
-             <label class="form-Username " for="Username">Tài khoản</label>
-             <input name="username" type="text" class="form-control mt-8" id="Username">
-             <label class="form-Password mt-16" for="Password">Mật khẩu</label>
-             <input name="password" type="password" class="form-control mt-8" id="Password">
-             <div class="login-help mt-16">
-                 <a href="forgotPassword.jsp">Quên mật khẩu</a> /
-                 <a href="signup.jsp">Đăng kí</a>
-             </div>
+             <label class="form-Username " for="Username">OTP</label>
+             <input name="otpcf" type="text" class="form-control mt-8" placeholder="Nhập mã OTP">
+             
              <div class="login-button text-center">
                  <!-- Begin-login-button -->
-                 <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                 <button type="submit" class="btn btn-primary">Submit</button>
              </div>
              <!-- End-login-button -->
          </form>

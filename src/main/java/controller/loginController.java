@@ -25,7 +25,7 @@ public class loginController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,7 +43,11 @@ public class loginController extends HttpServlet {
 				s.setAttribute("msg","signin");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
-			else System.out.println("tài khoản không tồn tại");
+			else { 
+				System.out.println("tài khoản không tồn tại");
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
+			
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			e.printStackTrace();
 		}		

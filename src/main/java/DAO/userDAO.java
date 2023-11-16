@@ -66,6 +66,7 @@ public class userDAO {
 			String phoneNumber = rs.getString("PHONENUMBER");
 			String email = rs.getString("EMAIL");
 			String homeaddress = rs.getString("HOMEADDRESS");
+			String filename = rs.getString("FILENAME");
 			
 			User user = new User();
 			user.setUserID(userId);
@@ -77,6 +78,7 @@ public class userDAO {
 			user.setPhoneNumber(phoneNumber);
 			user.setEmail(email);
 			user.setHomeAddress(homeaddress);
+			user.setFileName(filename);
 			
 			list.add(user);
 		}
@@ -103,6 +105,36 @@ public class userDAO {
 				user.setPhoneNumber(rs.getString("PHONENUMBER"));				
 				user.setEmail(rs.getString("EMAIL"));
 				user.setHomeAddress(rs.getString("HOMEADDRESS"));
+				user.setFileName(rs.getString("FILENAME"));
+				return user;
+			}
+		}catch(Exception e) {
+			e.getStackTrace();
+		}
+		return null;
+	}
+	
+	public User getUser(String email) throws ClassNotFoundException, SQLException, ParseException {
+		if(conn == null) {
+			conn = ConnectionClass.initializeDatabase();
+		}
+		try
+	    {
+			String sql = "SELECT * FROM user WHERE EMAIL = '" + email + "';";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getInt("USERID"));
+				user.setPerID(rs.getInt("PERID"));
+				user.setUsername(rs.getString("USERNAME"));
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setFullname(rs.getString("FULLNAME"));
+				user.setBirthdate(rs.getString("BIRTHDATE"));
+				user.setPhoneNumber(rs.getString("PHONENUMBER"));				
+				user.setEmail(rs.getString("EMAIL"));
+				user.setHomeAddress(rs.getString("HOMEADDRESS"));
+				user.setFileName(rs.getString("FILENAME"));
 				return user;
 			}
 		}catch(Exception e) {
@@ -138,7 +170,7 @@ public class userDAO {
 			conn = ConnectionClass.initializeDatabase();
 		}
 		try {
-			String sql = "UPDATE user SET USERNAME=?, PASSWORD=?, FULLNAME=?, BIRTHDATE=?, PHONENUMBER=?, EMAIL=?, HOMEADDRESS=? where USERID=?;";
+			String sql = "UPDATE user SET USERNAME=?, PASSWORD=?, FULLNAME=?, BIRTHDATE=?, PHONENUMBER=?, EMAIL=?, HOMEADDRESS=?, FILENAME=? where USERID=?;";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1,ud.getUsername());
 			ps.setString(2,ud.getPassword());
@@ -147,7 +179,27 @@ public class userDAO {
 			ps.setString(5,ud.getPhoneNumber());
 			ps.setString(6,ud.getEmail());
 			ps.setString(7,ud.getHomeAddress());
-			ps.setInt(8,userid);
+			ps.setString(8,ud.getFileName());
+			ps.setInt(9,userid);
+			
+			int rs = ps.executeUpdate();
+			if(rs>0) {
+				System.out.println("UPDATE thành công!");
+			}
+		}catch(Exception e) {
+			
+		}
+	}
+	
+	public void updatePassword(String pass, String email) throws ClassNotFoundException, SQLException, ParseException {
+		if(conn == null) {
+			conn = ConnectionClass.initializeDatabase();
+		}
+		try {
+			String sql = "UPDATE user SET PASSWORD=? where EMAIL=?;";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1,pass);
+			ps.setString(2,email);
 			
 			int rs = ps.executeUpdate();
 			if(rs>0) {
@@ -160,7 +212,7 @@ public class userDAO {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
         userDAO u = new userDAO();
-        
+        u.updatePassword("huyhuy","thuhoa08102003@gmail.com");
         
     }
 }

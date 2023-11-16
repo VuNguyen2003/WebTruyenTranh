@@ -16,12 +16,14 @@
 <body>
 <%@include file="header.jsp" %>
 <div id="content">
-	<form action="updateUser" method="post">
+	<form action="updateUser" method="post"  enctype="multipart/form-data" >
 	   <div class=" account mt-32">
 	       <div class="row PersonalIn4">
 	           <div class="col-sm-3 mt-16">
 	               <div class="personal-img">
-	                   <img src="img/images/img-onepiece.jpg" class="card-img-top" alt="..." style="width: 8.25rem;">
+	                   <img src="images/${mem.getFileName()}" class="card-img-top" alt="..." style="width: 8.25rem;">
+	                   <input type="file" name="image">
+	                   ${mem.getFileName()}
 	               </div>	
 	           </div>
 	           <div class="col-sm-9 mt-16">
@@ -71,10 +73,7 @@
 	        </div>
 	    </div>
 	</form>
-</div>
-	<!-- popup -->
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<link rel="stylesheet" href="alert/dist/sweetalert.css">
+</div>	
   <%@include file="footer.jsp" %>
 </body>
 </html>

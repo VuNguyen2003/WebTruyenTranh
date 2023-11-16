@@ -16,6 +16,7 @@
 @import url("sections/footer.css");
 @import url("sections/index.css");
 @import url("sections/adv-search.css");
+@import url("sections/forgotPassword.css");
 
 html {
     font-family: Arial, Helvetica, sans-serif;

@@ -29,22 +29,18 @@
      <div class="login rounded">
          <!-- Begin: login -->
          
-         <form action="login" method="post" class="login-form">
+         <form action="login.jsp" method="post" class="login-form">
              <!-- Begin-login-form -->
              <h2 class="login-title">
-                 Đăng nhập
+                 Cập nhật Mật khẩu
              </h2>
-             <label class="form-Username " for="Username">Tài khoản</label>
-             <input name="username" type="text" class="form-control mt-8" id="Username">
-             <label class="form-Password mt-16" for="Password">Mật khẩu</label>
-             <input name="password" type="password" class="form-control mt-8" id="Password">
-             <div class="login-help mt-16">
-                 <a href="forgotPassword.jsp">Quên mật khẩu</a> /
-                 <a href="signup.jsp">Đăng kí</a>
-             </div>
+             <label class="form-Username " for="Username">Mật khẩu mới</label>
+             <input name="pass" type="text" class="form-control mt-8" placeholder="Nhập mật khẩu mới" required>
+             <label class="form-Username " for="Username">Xác nhận mật khẩu mới</label>
+             <input name="passcf" type="text" class="form-control mt-8" placeholder="Nhập lại mật khẩu" required>
              <div class="login-button text-center">
                  <!-- Begin-login-button -->
-                 <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                 <button type="submit" class="btn btn-primary">Cập nhật</button>
              </div>
              <!-- End-login-button -->
          </form>

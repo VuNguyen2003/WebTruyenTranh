@@ -12,6 +12,7 @@ public class User implements Serializable{
 	private String PhoneNumber;
 	private String Email;
 	private String HomeAddress;
+	private String FileName;
 	
 	public User() {}
 	public User(int UserID, int PerID, String Username, String Password, String Fullname, String Birthdate, String PhoneNumber, String Email, String HomeAddress) {
@@ -106,5 +107,13 @@ public class User implements Serializable{
 	
 	public void setHomeAddress(String HomeAddress) {
 		this.HomeAddress = HomeAddress;
+	}
+	
+	public String getFileName() {
+		return FileName;
+	}
+	
+	public void setFileName(String filename) {
+		this.FileName = filename;
 	}
 }
