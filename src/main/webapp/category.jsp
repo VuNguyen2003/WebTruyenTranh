@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,10 +27,11 @@
                             <div class="form-group clearfix row">
                                 <label class="col-2 title-cate">Thể loại</label>
                                 <div class="col-10 row">
-                                    <a href="" class="col-3 form-check-label genre-item" for="flexCheckDefault"
-                                        title="">
-                                        18+
-                                    </a>
+                                <c:forEach var="i" items ="${listtag}" >
+	                                <a href="advancesearch?tags=${i.tagId}" class="col-3 form-check-label genre-item" for="flexCheckDefault" title="">
+	                                        ${i.tagName}
+	                                </a>
+                                </c:forEach>
                                 </div>
                             </div>
                         </div>
