@@ -30,15 +30,19 @@ public class resetPassword extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pass = request.getParameter("pass");
 		String passcf = request.getParameter("passcf");
+		String email =(String) request.getSession().getAttribute("email").toString();
+
 		if(pass.equals(passcf)) {
 			userDAO u = new userDAO();
 			try {
-				u.updatePassword(pass,(String)request.getSession().getAttribute("email"));
+				u.updatePassword(pass,email);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 			} catch (ClassNotFoundException | SQLException | ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		else request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
 	}
 
 }

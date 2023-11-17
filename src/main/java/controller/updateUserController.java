@@ -96,11 +96,12 @@ public class updateUserController extends HttpServlet {
 				u.updateUser(id, user);
 				HttpSession s = request.getSession();
 				s.setAttribute("mem", user);
-				request.getRequestDispatcher("per-info.jsp").forward(request, response);
+				
 			} catch (ClassNotFoundException | SQLException | ParseException e) {
 				e.printStackTrace();
 			}
 		}
+		request.getRequestDispatcher("per-info.jsp").forward(request, response);
 	}
 
 }

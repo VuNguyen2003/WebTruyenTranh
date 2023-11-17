@@ -29,7 +29,7 @@
      <div class="login rounded">
          <!-- Begin: login -->
          
-         <form action="login.jsp" method="post" class="login-form">
+         <form action="resetPassword" method="post" class="login-form">
              <!-- Begin-login-form -->
              <h2 class="login-title">
                  Cập nhật Mật khẩu

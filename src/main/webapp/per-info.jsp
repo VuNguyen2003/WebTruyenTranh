@@ -56,7 +56,7 @@
 	        <div class="row change-pass">
 	            <div class="mb-1 mt-8">
 	                <label for="inputOldpass" class="form-label">Old Password</label>
-	                <input name="oldpass" type="password" class="form-control" id="inputOldpass" required>
+	                <input name="oldpass" required type="password" class="form-control" id="inputOldpass" required>
 	            </div>
 	            <div class="mb-1">
 	                <label for="inputNewpass" class="form-label">New Password</label>

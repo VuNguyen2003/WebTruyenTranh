@@ -25,17 +25,18 @@ public class inputOTPController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Object otp = request.getSession().getAttribute("otp");
+		String otp =(String) request.getSession().getAttribute("otp").toString();
 		String otpcf = request.getParameter("otpcf");
 		
-		if(!otp.toString().equals(otpcf)) {
-			System.out.println("khac "+otp+"\n"+otpcf);
+		if(!otp.equals(otpcf)) {
+			request.getSession().setAttribute("warning", "warning");
+			request.getRequestDispatcher("inputOTP.jsp").forward(request, response);
 		}
 		else {
+			request.getSession().removeAttribute("otp");
 			System.out.println("giong "+otp+"\n"+otpcf);
 			request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
 		}
-		request.getSession().removeAttribute("otp");
 	}
 
 }

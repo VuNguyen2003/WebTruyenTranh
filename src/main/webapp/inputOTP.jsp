@@ -34,6 +34,11 @@
              <h2 class="login-title">
                  Nhập OTP
              </h2>
+             <% if(request.getSession().getAttribute("warning")!=null){ %>
+             	<div>Mã OTP không đúng</div>
+             <%}
+             	
+             %>
              <label class="form-Username " for="Username">OTP</label>
              <input name="otpcf" type="text" class="form-control mt-8" placeholder="Nhập mã OTP">
              

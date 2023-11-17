@@ -187,7 +187,7 @@ public class userDAO {
 				System.out.println("UPDATE thành công!");
 			}
 		}catch(Exception e) {
-			
+			System.out.println("UPDATE thất bại!");
 		}
 	}
 	

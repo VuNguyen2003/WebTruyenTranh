@@ -37,13 +37,15 @@ public class loginController extends HttpServlet {
 		
 		try {
 			User user = ud.getUser(username, password);
+			HttpSession s = request.getSession();
+			s.removeAttribute("invalid");
 			if(ud.checkExitAccount(username, password)) {
-				HttpSession s = request.getSession();
 				s.setAttribute("mem",user);
 				s.setAttribute("msg","signin");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
-			else { 
+			else {
+				s.setAttribute("invalid","invalid");
 				System.out.println("tài khoản không tồn tại");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.userDAO;
 import DTO.User;
@@ -24,7 +25,7 @@ public class signupController extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.getRequestDispatcher("signup.jsp").include(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,9 +38,11 @@ public class signupController extends HttpServlet {
 		try {
 			response.setContentType("text/html"); 
 			response.setCharacterEncoding("UTF-8");
+			request.removeAttribute("msg");
+			
 			if(!password.equals(passwordcf)) {
 				System.out.println("Đăng ký thất bại");
-				request.getRequestDispatcher("signup.jsp").include(request, response);
+				request.setAttribute("msg", "fail");
 			}
 			else {
 				User newUser = new User();
@@ -53,12 +56,10 @@ public class signupController extends HttpServlet {
 				newUser.setEmail(email);
 				newUser.setHomeAddress("");
 				userDAO u = new userDAO();
-				System.out.println(u.getCount());
 				u.insertUser(newUser);
-				request.setAttribute("user", username);
-				RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
-				rd.forward(request,response);
+				request.setAttribute("msg", "success");
 			}
+			request.getRequestDispatcher("signup.jsp").forward(request,response);
 		}
 		catch(Exception e) {
 			

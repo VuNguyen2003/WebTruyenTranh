@@ -30,6 +30,7 @@ public class forgotPasswordController extends HttpServlet {
 			if(email.sendOTP(to)>0) {
 				userDAO u = new userDAO();
 				request.getSession().setAttribute("email",to);
+				request.getSession().removeAttribute("warning");
 				request.getSession().setAttribute("otp",email.sendOTP(to));
 				request.getRequestDispatcher("inputOTP.jsp").forward(request, response);
 			}else { 
