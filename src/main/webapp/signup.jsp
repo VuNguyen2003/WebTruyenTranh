@@ -32,7 +32,9 @@
                     <h2 class="sign-up-title">
                         Đăng kí
                     </h2>
-                    <% String m = request.getAttribute("msg").toString();
+                    <%
+                    if(request.getAttribute("msg")!=null){
+                    String m = request.getAttribute("msg").toString();
                     if(m.equals("fail")){ %>
 	             	<div class="alert alert-danger">
 					    <strong>Mật khẩu xác nhận không khớp!</strong> Vui lòng nhập lại.
@@ -42,7 +44,7 @@
                     <div class="alert alert-success">
 					    <strong>Chúc mừng!</strong> Bạn đã đăng ký thành công <3
 					</div>
-					<%} %>
+					<%}} %>
 	             	
                     <label class="form-Username mt-16" for="Username">Tài khoản</label>
                     <input name="username" type="text" class="form-control mt-8" id="Username" required>
