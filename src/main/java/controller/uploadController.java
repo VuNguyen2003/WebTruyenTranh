@@ -17,7 +17,9 @@ import javax.servlet.http.Part;
 
 import DAO.storyDAO;
 import DTO.Find;
+import DTO.Post;
 import DTO.Story;
+import DTO.User;
 
 @WebServlet("/uploadController")
 @MultipartConfig
@@ -49,8 +51,7 @@ public class uploadController extends HttpServlet {
         filePart.write(savePath + File.separator + fileName);
 
         request.setAttribute("filePath", savePath + File.separator + fileName);
-        //RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
-        //rd.forward(request, response);
+
         // Get form data
         String storyName = request.getParameter("name_story");
         String author = request.getParameter("author");
@@ -93,6 +94,19 @@ public class uploadController extends HttpServlet {
 				e.printStackTrace();
 			}
         }
+        
+        User user = new User();
+        Post post = new Post();
+        post.setUserId(user.getUserID());
+        post.setStoryId(story.getStoryId());
+        
+        try {
+        	dao.inputPost(post);
+		} catch (ClassNotFoundException | SQLException | ParseException e) {
+			e.printStackTrace();
+		}
+        
+        
         
         System.out.println("Upload success!");
     }

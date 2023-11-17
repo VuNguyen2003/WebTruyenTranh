@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
+
 import DTO.*;
 
 
@@ -73,6 +75,62 @@ public class storyDAO {
 			
 			preparedStmt.setInt(1,find.getStoryId());
 			preparedStmt.setInt(2,find.getTagId());
+			
+			preparedStmt.execute();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void inputPost(Post post) throws ClassNotFoundException, SQLException, ParseException {
+		if(conn == null) {
+			conn = ConnectionClass.initializeDatabase();
+		}
+		try {
+			String sql = "INSERT INTO FIND(STORYID, TAGID) VALUES (?,?)";
+			preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+			
+			preparedStmt.setInt(1,post.getUserId());
+			preparedStmt.setInt(2,post.getStoryId());
+			
+			preparedStmt.execute();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void inputStoryPage(StoryPage page) throws ClassNotFoundException, SQLException, ParseException {
+		if(conn == null) {
+			conn = ConnectionClass.initializeDatabase();
+		}
+		try {
+			String sql = "INSERT INTO STORYPAGE(PAGEID, CHAPTERID, PAGECONTENT) VALUES (?,?,?)";
+			preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+			
+			preparedStmt.setString(1,UUID.randomUUID().toString());
+			preparedStmt.setString(2,UUID.randomUUID().toString());
+			preparedStmt.setString(3,page.getPageContent());
+			
+			preparedStmt.execute();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void inputChapter(Chapter chapter) throws ClassNotFoundException, SQLException, ParseException {
+		if(conn == null) {
+			conn = ConnectionClass.initializeDatabase();
+		}
+		try {
+			String sql = "INSERT INTO CHAPTER(CHAPTERID, STORYID, CHAPTERNAME) VALUES (?,?,?)";
+			preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+			
+			preparedStmt.setString(1,UUID.randomUUID().toString());
+			preparedStmt.setInt(2,chapter.getStoryId());
+			preparedStmt.setString(3,chapter.getChapterName());
 			
 			preparedStmt.execute();
 		}

@@ -76,7 +76,7 @@
 	                Danh sách chương
 	            </h2>
 	            <div class="row heading">
-	                <a class="col-4 no-wrap" href="upload-chapter.html">
+	                <a class="col-4 no-wrap" href="upload-chapter.jsp">
 	                    <i class="fa-solid fa-plus"></i>
 	                    Thêm chương</a>
 	            </div>

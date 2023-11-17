@@ -5,18 +5,16 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class StoryPage implements Serializable{
 	private String pageId;
-    private int storyId;
+    private String chapterId;
     private String pageContent;
-    private String chapter;
 
     public StoryPage() {
     }
 
-    public StoryPage(String pageId, int storyId, String pageContent, String chapter) {
+    public StoryPage(String pageId, String chapterId, String pageContent) {
         this.pageId = pageId;
-        this.storyId = storyId;
+        this.chapterId = chapterId;
         this.pageContent = pageContent;
-        this.chapter = chapter;
     }
 
     
@@ -28,12 +26,12 @@ public class StoryPage implements Serializable{
         this.pageId = pageId;
     }
 
-    public int getStoryId() {
-        return storyId;
+    public String getChapterId() {
+        return chapterId;
     }
 
-    public void setStoryId(int storyId) {
-        this.storyId = storyId;
+    public void setChapterId(String chapterId) {
+        this.chapterId = chapterId;
     }
 
     public String getPageContent() {
@@ -42,13 +40,5 @@ public class StoryPage implements Serializable{
 
     public void setPageContent(String pageContent) {
         this.pageContent = pageContent;
-    }
-
-    public String getChapter() {
-        return chapter;
-    }
-
-    public void setChapter(String chapter) {
-        this.chapter = chapter;
     }
 }
