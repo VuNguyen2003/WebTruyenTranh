@@ -20,8 +20,8 @@ public class logoutController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession s = request.getSession();
-		if(s.getAttribute("mem") != null) {
+		HttpSession s = request.getSession(false); //if no session is active no session is created
+		if(s != null) {
 			s.removeAttribute("mem");
 			s.removeAttribute("msg");
 			response.sendRedirect("login.jsp");
