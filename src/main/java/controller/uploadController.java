@@ -95,7 +95,7 @@ public class uploadController extends HttpServlet {
         }
         
         System.out.println("Upload success!");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("home").forward(request, response);
     }
 
 }
