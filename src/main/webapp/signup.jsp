@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./assets/fonts/themify-icons-font/themify-icons/themify-icons.css">
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -29,6 +32,18 @@
                     <h2 class="sign-up-title">
                         Đăng kí
                     </h2>
+                    <% String m = request.getAttribute("msg").toString();
+                    if(m.equals("fail")){ %>
+	             	<div class="alert alert-danger">
+					    <strong>Mật khẩu xác nhận không khớp!</strong> Vui lòng nhập lại.
+					</div>
+	             	<%}
+                    else if(m.equals("success")){ %>
+                    <div class="alert alert-success">
+					    <strong>Chúc mừng!</strong> Bạn đã đăng ký thành công <3
+					</div>
+					<%} %>
+	             	
                     <label class="form-Username mt-16" for="Username">Tài khoản</label>
                     <input name="username" type="text" class="form-control mt-8" id="Username" required>
                     <label class="form-E-mail mt-16" for="E-mail">E-mail</label>
@@ -46,5 +61,6 @@
             </div>
             <!-- End: sign-up -->
 <%@include file="footer.jsp" %>
+	
 </body>
 </html>
