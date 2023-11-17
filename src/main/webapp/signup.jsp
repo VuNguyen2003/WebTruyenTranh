@@ -30,11 +30,11 @@
                 <!-- Begin: sign-up -->
                 <form action="signup" method="post" class="sign-up-form" onsubmit="return validateForm()">
                     <h2 class="sign-up-title">
+                    
                         Đăng kí
                     </h2>
-                    <%
-                    if(request.getAttribute("msg")!=null){
-                    String m = request.getAttribute("msg").toString();
+                    <% String m = (String)request.getAttribute("msg");
+                    if(m!=null){
                     if(m.equals("fail")){ %>
 	             	<div class="alert alert-danger">
 					    <strong>Mật khẩu xác nhận không khớp!</strong> Vui lòng nhập lại.
