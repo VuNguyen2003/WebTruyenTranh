@@ -32,5 +32,5 @@ public class logoutController extends HttpServlet {
 		
 		doGet(request, response);
 	}
-
+	
 }
