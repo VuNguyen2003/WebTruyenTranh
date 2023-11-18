@@ -39,7 +39,7 @@ public class loginController extends HttpServlet {
 				HttpSession s = request.getSession();
 				s.setAttribute("mem",user);
 				s.setAttribute("msg","signin");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("home").forward(request, response);
 			}
 			else System.out.println("tài khoản không tồn tại");
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
