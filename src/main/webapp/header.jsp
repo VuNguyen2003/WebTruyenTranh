@@ -49,7 +49,7 @@
                                 <i class="fa-solid fa-angle-down angle-icon"></i>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="">CATEGORY</a></li>
+                                <li><a href="category ">CATEGORY</a></li>
                                 <li><a href="hastagsearch">ADVANCE SEARCH</a></li>
                                 <li><a href="">FAVORITE</a></li>
                             </ul>

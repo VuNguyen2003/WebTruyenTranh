@@ -129,7 +129,7 @@
 	    try {
 	        Class.forName("com.mysql.jdbc.Driver");
 	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ratings", "username", "password");
-	        stmt = conn.prepareStatement("INSERT INTO ratings (rating) VALUES (?)");
+	        stmt = conn.prepareStatement("INSERT INTO ratings VALUES (?)");
 	        stmt.setString(1, rating);
 	        stmt.executeUpdate();
 	    } catch (Exception e) {
