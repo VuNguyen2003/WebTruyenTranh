@@ -49,6 +49,8 @@ public class uploadController extends HttpServlet {
             fileSaveDir.mkdir();
         }
 
+	//RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
+        //rd.forward(request, response);
         filePart.write(savePath + File.separator + fileName);
 
         request.setAttribute("filePath", savePath + File.separator + fileName);
