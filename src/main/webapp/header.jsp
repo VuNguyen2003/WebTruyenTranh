@@ -49,9 +49,9 @@
                                 <i class="fa-solid fa-angle-down angle-icon"></i>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="category ">CATEGORY</a></li>
+                                <li><a href="category">CATEGORY</a></li>
                                 <li><a href="hastagsearch">ADVANCE SEARCH</a></li>
-                                <li><a href="">FAVORITE</a></li>
+                                <li><a href="favorite">FAVORITE</a></li>
                             </ul>
                         </li>
                         <%-- <% if (user != null) { %>
