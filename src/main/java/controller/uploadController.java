@@ -13,6 +13,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import DAO.storyDAO;
@@ -71,6 +72,10 @@ public class uploadController extends HttpServlet {
         }
         // storyId tự động tăng
         story.setStoryId(maxStoryId + 1);
+        
+        // Store the storyId in a session attribute
+        HttpSession session = request.getSession();
+        session.setAttribute("storyId", story.getStoryId());
         story.setTitle(storyName);
         story.setAuthor(author);
         // lưu đường dẫn của file ảnh
@@ -94,7 +99,7 @@ public class uploadController extends HttpServlet {
 				e.printStackTrace();
 			}
         }
-        
+        /*
         User user = new User();
         Post post = new Post();
         post.setUserId(user.getUserID());
@@ -105,9 +110,7 @@ public class uploadController extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			e.printStackTrace();
 		}
-        
-        
-        
+        */
         System.out.println("Upload success!");
     }
 

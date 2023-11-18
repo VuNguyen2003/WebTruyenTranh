@@ -19,6 +19,8 @@ public class storyDAO {
 	Connection conn = null;
 	PreparedStatement preparedStmt = null;
 	
+	String chapterID = UUID.randomUUID().toString();
+	
 	// get storyId tránh lặp khóa
 	public int getMaxStoryId() throws SQLException, ClassNotFoundException {
 	    int maxStoryId = 0;
@@ -57,14 +59,13 @@ public class storyDAO {
 			preparedStmt.setString(8,story.getSummary());
 			preparedStmt.setString(9,story.getStatus());
 			preparedStmt.execute();
-			System.out.println(sql);
 	    }
 		catch (Exception e){
 			e.printStackTrace();
 		}
 	}
 	
-	// đưa dữ liệu vào bảng hashtag
+	// đưa dữ liệu vào bảng Find
 	public void inputFind(Find find) throws ClassNotFoundException, SQLException, ParseException {
 		if(conn == null) {
 			conn = ConnectionClass.initializeDatabase();
@@ -102,37 +103,40 @@ public class storyDAO {
 	}
 	
 	public void inputStoryPage(StoryPage page) throws ClassNotFoundException, SQLException, ParseException {
-		if(conn == null) {
-			conn = ConnectionClass.initializeDatabase();
-		}
-		try {
-			String sql = "INSERT INTO STORYPAGE(PAGEID, CHAPTERID, PAGECONTENT) VALUES (?,?,?)";
-			preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
-			
-			preparedStmt.setString(1,UUID.randomUUID().toString());
-			preparedStmt.setString(2,UUID.randomUUID().toString());
-			preparedStmt.setString(3,page.getPageContent());
-			
-			preparedStmt.execute();
-		}
-		catch (Exception e){
-			e.printStackTrace();
-		}
+	    if(conn == null) {
+	        conn = ConnectionClass.initializeDatabase();
+	        System.out.println("Executing innputStoryPage...");
+	    }
+	    try {
+	        String sql = "INSERT INTO STORYPAGE(PAGEID, CHAPTERID, PAGECONTENT, PAGENUMBER) VALUES (?,?,?,?)";
+	        preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+	        
+	        preparedStmt.setString(1,page.getPageId());
+	        preparedStmt.setString(2,page.getChapterId());
+	        preparedStmt.setString(3,page.getPageContent());
+	        preparedStmt.setInt(4, page.getPageNumber());
+	        
+	        preparedStmt.execute();
+	    }
+	    catch (Exception e){
+	        e.printStackTrace();
+	    }
 	}
 	
 	public void inputChapter(Chapter chapter) throws ClassNotFoundException, SQLException, ParseException {
 		if(conn == null) {
 			conn = ConnectionClass.initializeDatabase();
+			System.out.println("Executing inputChapter...");
 		}
 		try {
-			String sql = "INSERT INTO CHAPTER(CHAPTERID, STORYID, CHAPTERNAME) VALUES (?,?,?)";
-			preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+			String sql = "INSERT INTO CHAPTER (CHAPTERID, STORYID, CHAPTERNAME) VALUES (?, ?, ?)";
+			preparedStmt = conn.prepareStatement(sql);
 			
-			preparedStmt.setString(1,UUID.randomUUID().toString());
-			preparedStmt.setInt(2,chapter.getStoryId());
-			preparedStmt.setString(3,chapter.getChapterName());
+			preparedStmt.setString(1, chapter.getChapterId());
+			preparedStmt.setInt(2, chapter.getStoryId());
+			preparedStmt.setString(3, chapter.getChapterName());
 			
-			preparedStmt.execute();
+			preparedStmt.executeUpdate();
 		}
 		catch (Exception e){
 			e.printStackTrace();
