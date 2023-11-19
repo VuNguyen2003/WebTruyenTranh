@@ -36,6 +36,20 @@ public class storyDAO {
 	    return maxStoryId;
 	}
 
+	public int getMaxPageNumber() throws SQLException, ClassNotFoundException {
+	    int maxPageNumber = 0;
+	    if(conn == null) {
+	        conn = ConnectionClass.initializeDatabase();
+	    }
+	    String sql = "SELECT MAX(PAGENUMBER) AS MAXPAGENUMBER FROM STORYPAGE";
+	    preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+	    ResultSet rs = preparedStmt.executeQuery();
+	    if (rs.next()) {
+	    	maxPageNumber = rs.getInt("MAXPAGENUMBER");
+	    }
+	    return maxPageNumber;
+	}
+
 	// đưa dữ liệu vào bảng story
 	public void inputStory(Story story) throws ClassNotFoundException, SQLException, ParseException {
 		if(conn == null) {
