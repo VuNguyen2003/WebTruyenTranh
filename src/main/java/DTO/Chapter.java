@@ -8,6 +8,7 @@ public class Chapter implements Serializable {
     private String chapterId;
     private int storyId;
     private String chapterName;
+    private int chapternumber;
 
     public String getChapterId() {
         return chapterId;
@@ -31,5 +32,13 @@ public class Chapter implements Serializable {
 
     public void setChapterName(String chapterName) {
         this.chapterName = chapterName;
+    }
+    
+    public int getChapterNumber() {
+    	return chapternumber;
+    }
+    
+    public void setChapterNumber(int chapternumber) {
+    	this.chapternumber = chapternumber;
     }
 }
