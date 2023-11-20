@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +21,6 @@ import javax.servlet.http.Part;
 
 import DAO.storyDAO;
 import DTO.Chapter;
-import DTO.Story;
 import DTO.StoryPage;
 
 @WebServlet("/uploadChapterController")
