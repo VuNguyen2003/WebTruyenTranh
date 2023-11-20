@@ -410,6 +410,42 @@ public class storyDAO {
     	return story;
     }
     
+    public ArrayList<Story> topStory() throws ClassNotFoundException, SQLException{
+		ArrayList<Story> list = new ArrayList<Story>();
+		if(conn == null)
+			conn = ConnectionClass.initializeDatabase();
+		String sql = "Select * from STORY ORDER BY FAVORITE DESC LIMIT 10";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		ResultSet rs = pstm.executeQuery();
+		while (rs.next()) {
+			int storyId = rs.getInt("STORYID");
+			String title = rs.getString("TITLE");
+			Date uploadDate = rs.getDate("UPLOADDATE");
+			//format lại ngày tháng thành kiểu string "ngày/tháng/năm"
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			String strDate = dateFormat.format(uploadDate);
+			float rating = rs.getFloat("RATING");
+			String cover = rs.getString("COVER");
+			int favorite = rs.getInt("FAVORITE");
+			String author = rs.getString("AUTHOR");
+			String summary = rs.getString("SUMMARY");
+			String status = rs.getString("STATUS");
+			Story story = new Story();
+			story.setStoryId(storyId);
+			story.setTitle(title);
+			story.setUploadDate(strDate);
+			story.setRating(rating);
+			story.setCover(cover);
+			story.setFavorite(favorite);
+			story.setAuthor(author);
+			story.setSummary(summary);
+			story.setStatus(status);
+			//lưu lớp story vào list story
+			list.add(story);
+		}
+		return list;
+	}
+    
 	public static void main(String args[]) throws ClassNotFoundException, SQLException, ParseException {
 		ArrayList<Story> results = new ArrayList<Story>();
 		storyDAO dao = new storyDAO();
