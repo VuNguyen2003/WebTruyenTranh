@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page import = "java.sql.*" %>
 <%@ page import = "java.text.*" %>
 <%@ page import = "javax.servlet.http.*"%>
@@ -103,6 +104,19 @@
                         <div class="col text-center no-wrap">Số chương</div>
                         
                     </div>
+                    <c:forEach var="i" items ="${listChapter}" >
+                        <nav>
+	                        <ul>
+	                            <li class="row">
+	                                <div class="col no-wrap text-center chapter-list">
+	                                    <a href="readstory?ID=${listStory.getStoryId()}&chapterID=${i.getChapterId()}&indexPage=${i.getChapterNumber()}">
+	                                        Chapter ${i.getChapterNumber()}: ${i.getChapterName()}
+	                                    </a>
+	                                </div>
+	                            </li>
+	                        </ul>
+                    	</nav>
+                    </c:forEach>
                 </div>
             </div>
         </div>
