@@ -29,12 +29,19 @@ public class viewIntroController extends HttpServlet{
 		String storyID = request.getParameter("id");
 		Story Story = new Story();
 		storyDAO introStory = new storyDAO();
+		hashtagDAO hashtag = new hashtagDAO();
 		chapterDAO listChapter = new chapterDAO();
 		ArrayList<Chapter> chapter = new ArrayList<Chapter>();
+		ArrayList<String> listHashtag = new ArrayList<String>();
 		try {
-			
+			listHashtag = hashtag.getTagStory(Integer.parseInt(storyID));
 			Story = introStory.introStory(Integer.parseInt(storyID));
 			chapter = listChapter.getChapterList(Integer.parseInt(storyID));
+			String tags = listHashtag.get(0);
+			for (int i = 1; i < listHashtag.size();i++) {
+				tags += " - " + listHashtag.get(i);
+			}
+			request.setAttribute("tags", tags);
 			request.setAttribute("listStory", Story);
 			request.setAttribute("listChapter", chapter);
 			request.getRequestDispatcher("intro-comic.jsp").forward(request, response);

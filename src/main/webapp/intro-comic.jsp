@@ -49,7 +49,7 @@
                     </div>
                     <div class="mb-1">
                         <label for="inputTag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="inputTag" placeholder="Action - Fantasy - Manhua - Shounen" disabled>
+                        <input type="text" class="form-control" id="inputTag" placeholder="${tags}" disabled>
                     </div>
                     <div class="row g-2 align-items-center">
                         <div class="col-3">
@@ -59,14 +59,7 @@
                             <p> ${listStory.getStatus()}</p>
                         </div>
                     </div>
-                    <div class="row g-2 align-items-center">
-                        <div class="col-3">
-                            <label for="inputView" class="col-form-label">Lượt xem</label>
-                        </div>
-                        <div class="col-9">
-                            <p> 1000</p>
-                        </div>
-                    </div>
+                    
                     <div class="rating-box">
                         <div class="stars">
                             <div class="col-6 five-stars">
@@ -107,9 +100,8 @@
                         Danh sách chương
                     </h2>
                     <div class="row heading">
-                        <div class="col-4 no-wrap">Số chương</div>
-                        <div class="col-4 no-wrap text-center">Cập nhật</div>
-                        <div class="col-4 no-wrap text-center">Lượt xem</div>
+                        <div class="col text-center no-wrap">Số chương</div>
+                        
                     </div>
                 </div>
             </div>
