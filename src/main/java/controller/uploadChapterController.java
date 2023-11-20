@@ -74,7 +74,7 @@ public class uploadChapterController extends HttpServlet {
 		page.setChapterId(chapter.getChapterId());
 		page.setPageContent(savePath + File.separator + fileName);
 		page.setPageNumber(1);
-		
+
 		try {
 		    dao.inputChapter(chapter);
 		    dao.inputStoryPage(page);
