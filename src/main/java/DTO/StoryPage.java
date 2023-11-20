@@ -23,8 +23,8 @@ public class StoryPage implements Serializable{
         return pageId;
     }
 
-    public void setPageId(String pageId) {
-        this.pageId = pageId;
+    public void setPageId(String pageid2) {
+        this.pageId = pageid2;
     }
 
     public String getChapterId() {

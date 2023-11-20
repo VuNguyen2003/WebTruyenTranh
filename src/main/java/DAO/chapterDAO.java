@@ -15,7 +15,7 @@ public class chapterDAO {
 		ArrayList<Chapter> list = new ArrayList<Chapter>();
 		if(conn == null)
 			conn = ConnectionClass.initializeDatabase();
-		String sql = "Select * from Chapter Where STORYID = ?";
+		String sql = "Select * from Chapter Where STORYID = ? order by CHAPTERNUMBER";
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		pstm.setInt(1,StoryID);
 		ResultSet rs = pstm.executeQuery();

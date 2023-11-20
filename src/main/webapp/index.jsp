@@ -39,14 +39,16 @@
                         <!-- owl carousel, display 5/n -->
                         <div class="owl-carousel owl-theme">
                             <!-- item 1 -->
-                            <c:forEach var="i" begin="1" end="8">
+                            <c:forEach var="i" items="${topStory}">
                             <div class="item">
                                 <div class="caption">
-                                    <img class="img-fluid" src="Resource/img/images/img-1.jpg" alt="Image 1">
+                                	<a href="viewintro?id=${i.getStoryId()}">
+                                    <img class="img-fluid" src="${i.getCover()}" alt="Image 1">
                                     <div class="caption-content">
-                                        <h3>Caption 1</h3>
-                                        <p>This is the caption for image 2.</p>
+                                        <h3>${i.getTitle()}</h3>
+                                        <p>rating: ${i.getRating()}</p>
                                     </div>
+                                    </a>
                                 </div>
                             </div>
                             </c:forEach>
@@ -75,7 +77,7 @@
 					                    <img src="${i.getCover()}" alt="">
 					                    <div class="caption-content">
 					                        <h3>${i.getTitle()}</h3>
-					                        <p>${i.getRating()}</p>
+					                        <p>rating: ${i.getRating()}</p>
 					                     </div>
 					                     </a>
 				                    </div>
