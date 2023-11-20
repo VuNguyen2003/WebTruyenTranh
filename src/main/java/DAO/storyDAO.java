@@ -396,6 +396,8 @@ public class storyDAO {
     	return story;
     }
     
+    
+    
 	public static void main(String args[]) throws ClassNotFoundException, SQLException, ParseException {
 		ArrayList<Story> results = new ArrayList<Story>();
 		storyDAO dao = new storyDAO();

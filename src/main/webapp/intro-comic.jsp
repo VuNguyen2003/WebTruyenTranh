@@ -49,7 +49,7 @@
                     </div>
                     <div class="mb-1">
                         <label for="inputTag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="inputTag" placeholder="Action - Fantasy - Manhua - Shounen">
+                        <input type="text" class="form-control" id="inputTag" placeholder="Action - Fantasy - Manhua - Shounen" disabled>
                     </div>
                     <div class="row g-2 align-items-center">
                         <div class="col-3">
@@ -78,16 +78,11 @@
                             </div>
                             <div class="col-6 btn-next-star">
                                 <button type="button" class="btn btn-primary btn-sm btn-fav">Yêu thích</button>
-                                <button type="button" class="btn btn-primary btn-sm btn-rp">Báo cáo</button>
                             </div>
                         </div>
                     </div>
                     <div class="btn-read mt-16">
-                        <a class="btn btn-warning " href="">Đọc từ đầu</a>
-                        <a class="btn btn-warning " href="">Đọc mới nhất</a>
-                        <a class="btn btn-danger " href="read-comic.html">Đọc tiếp
-                            <i class="fa-solid fa-angle-right"></i>
-                        </a>
+                        <a class="btn btn-warning" href="readstory?chapterID=onepice2">Đọc từ đầu</a>
                     </div>
                 </div>
             </div>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 import DAO.*;
+import DTO.*;
 @WebServlet(urlPatterns = "/readstory", name = "readStory")
 public class readStoryController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -21,10 +22,9 @@ public class readStoryController extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		storypageDAO page = new storypageDAO();
 		String chapterID = request.getParameter("chapterID");
-		String storyID = request.getParameter("storyID");
-		ArrayList<String> pagelist = new ArrayList<String>();
+		ArrayList<StoryPage> pagelist = new ArrayList<StoryPage>();
 		try {
-			pagelist = page.getStoryPage(Integer.parseInt(storyID), chapterID);
+			pagelist = page.getStoryPage(chapterID);
 			request.setAttribute("pageList",pagelist);
 			request.getRequestDispatcher("read-comic.jsp").forward(request, response);
 		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {

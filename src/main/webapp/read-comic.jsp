@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,9 @@
                                         <i class="fa-solid fa-chevron-left"></i>
                                     </a>
                                     <select name="ct100$mainContent$ddlSelectChapter" id="ct100_mainContent_ddlSelectChapter" class="select-chapter">
-                                        <option value="">Chapter ...</option>
+                                        <option value="">Chapter 1</option>
+                                        <option value="">Chapter 2</option>
+                                        <option value="">Chapter 3</option>
                                     </select>
                                     <a href="#" class="next a_next">
                                         <i class="fa-solid fa-chevron-right"></i>
@@ -45,12 +48,11 @@
                                 </div>
                             </div>
                             <div class="reading-detail box_doc mt-16">
-                                <div class="page-chapter" id="page_1">
-                                    <img src="Resource/img/images/001.jpg" alt="Đảo Hải Tặc chap 1045 - Trang 1" data-index = "1">
-                                </div>
-                                <div class="page-chapter" id="page_2">
-                                    <img src="Resource/img/images/002.jpg" alt="Đảo Hải Tặc chap 1045 - Trang 2" data-index = "2">
-                                </div>
+                            	<c:forEach var="i" items ="${pageList}" >
+	                                <div class="page-chapter" id="page_1">
+	                                    <img src="${i.getPageContent()}" alt="Đảo Hải Tặc chap 1045 - Trang 1" data-index = "1">
+	                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
