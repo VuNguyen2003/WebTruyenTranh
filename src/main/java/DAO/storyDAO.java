@@ -119,7 +119,7 @@ public class storyDAO {
 	public void inputStoryPage(StoryPage page) throws ClassNotFoundException, SQLException, ParseException {
 	    if(conn == null) {
 	        conn = ConnectionClass.initializeDatabase();
-	        System.out.println("Executing innputStoryPage...");
+	        System.out.println("Executing inputStoryPage...");
 	    }
 	    try {
 	        String sql = "INSERT INTO STORYPAGE(PAGEID, CHAPTERID, PAGECONTENT, PAGENUMBER) VALUES (?,?,?,?)";
@@ -143,13 +143,13 @@ public class storyDAO {
 			System.out.println("Executing inputChapter...");
 		}
 		try {
-			String sql = "INSERT INTO CHAPTER (CHAPTERID, STORYID, CHAPTERNAME) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO CHAPTER (CHAPTERID, STORYID, CHAPTERNAME, CHAPTERNUMBER) VALUES (?, ?, ?, ?)";
 			preparedStmt = conn.prepareStatement(sql);
 			
 			preparedStmt.setString(1, chapter.getChapterId());
 			preparedStmt.setInt(2, chapter.getStoryId());
 			preparedStmt.setString(3, chapter.getChapterName());
-			
+			preparedStmt.setInt(4, chapter.getChapterNumber());
 			preparedStmt.executeUpdate();
 		}
 		catch (Exception e){

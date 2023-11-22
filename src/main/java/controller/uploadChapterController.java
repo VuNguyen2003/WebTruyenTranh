@@ -27,7 +27,7 @@ import DTO.StoryPage;
 @MultipartConfig
 public class uploadChapterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final String SAVE_DIR = "user";
+    private static final String SAVE_DIR = "Resource/data/user";
     
     public uploadChapterController() {
         super();

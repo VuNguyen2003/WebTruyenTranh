@@ -70,13 +70,13 @@
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                             </div>
-                            <div class="col-6 btn-next-star">
+                            <form class="col-6 btn-next-star" action="" method="post">
                                 <button type="button" class="btn btn-primary btn-sm btn-fav">Yêu thích</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="btn-read mt-16">
-                        <a class="btn btn-warning" href="readstory?chapterID=onepice2">Đọc từ đầu</a>
+                        <a class="btn btn-warning" href="readstory?chapterID=onepice2">Đọc truyện</a>
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@
 	    try {
 	        Class.forName("com.mysql.jdbc.Driver");
 	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ratings", "username", "password");
-	        stmt = conn.prepareStatement("INSERT INTO ratings VALUES (?)");
+	        stmt = conn.prepareStatement("INSERT INTO ratings VALUES (?,?,?)");
 	        stmt.setString(1, rating);
 	        stmt.executeUpdate();
 	    } catch (Exception e) {
