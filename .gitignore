@@ -1,12 +1,5 @@
 ./build/
-build/classes/DTO/User.class
-build/classes/DTO/Story.class
-build/classes/DTO/Hastag.class
-build/classes/DAO/userDAO.class
-build/classes/DAO/storyDAO.class
-build/classes/DAO/ConnectionClass.class
-build/classes/controller/uploadController.class
-build/classes/controller/SignupController.class
-build/classes/controller/pageController.class
-build/classes/controller/logoutController.class
 *.class
+src/main/java/DAO/ConnectionClass.java
+*.class
+

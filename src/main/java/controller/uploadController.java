@@ -1,11 +1,15 @@
 package controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import javax.mail.Folder;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,19 +40,40 @@ public class uploadController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Part filePart = request.getPart("cover"); // Retrieves <input type="file" name="cover">
+    	response.setContentType("text/html");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+    	
+    	Part filePart = request.getPart("cover"); // Retrieves <input type="file" name="cover">
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-        String appPath = request.getServletContext().getRealPath("");
-        String savePath = appPath + File.separator + SAVE_DIR;
+        System.out.println(fileName);
+        
+        //lưu file ảnh vào server----------------------------------------
+        String projectPath = System.getProperty("user.dir");
 
-        File fileSaveDir = new File(savePath);
-        if (!fileSaveDir.exists()) {
-            fileSaveDir.mkdir();
-        }
+        // Tạo một đối tượng File với đường dẫn của project
+        File projectDirectory = new File(projectPath);
 
-        filePart.write(savePath + File.separator + fileName);
+        // Lấy đường dẫn tuyệt đối của project
+        String absolutePath = projectDirectory.getAbsolutePath();
 
-        request.setAttribute("filePath", savePath + File.separator + fileName);
+        System.out.println("Đường dẫn tuyệt đối của project trong Eclipse: " + absolutePath);
+        String uploadPath = System.getProperty("user.dir")+"\\"+fileName;
+    	System.out.println(uploadPath);
+        try {
+        	FileOutputStream fos = new FileOutputStream(uploadPath);
+			InputStream is = filePart.getInputStream();
+			byte[] data = new byte[is.available()];
+			is.read(data);
+			fos.write(data);
+			fos.close();
+			System.out.println("lưu vào server thành công!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        //----------------------------------------------------------------
+        //filePart.write(savePath + File.separator + fileName);
+        //request.setAttribute("filePath", savePath + File.separator + fileName);
         //RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
         //rd.forward(request, response);
         // Get form data
@@ -68,13 +93,13 @@ public class uploadController extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-        // storyId tự động tăng
+        
         story.setStoryId(maxStoryId + 1);
         story.setTitle(storyName);
         story.setAuthor(author);
-        // lưu đường dẫn của file ảnh
-        story.setCover(savePath + File.separator + fileName);
-        
+        if(fileName!="") {
+        	story.setCover(fileName);
+        }
         
         try {
 			dao.inputStory(story);
@@ -94,8 +119,16 @@ public class uploadController extends HttpServlet {
 			}
         }
         
+        
         System.out.println("Upload success!");
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.setAttribute("story",story);
+        request.getRequestDispatcher("upload.jsp").forward(request, response);
     }
-
+    
+    public static void main (String[] args) {
+    	File f = new File("src\\main\\webapp\\Resource\\img\\images");
+    	String path = f.getAbsolutePath()+"\\"+"001.jpg";
+    	String imgPath = path.replace('\\', '/');
+    	System.out.println(path);
+    }
 }
