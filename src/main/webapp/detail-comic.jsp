@@ -18,13 +18,25 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-<form action="uploadController" method="post" enctype="multipart/form-data">
+<h1 style="margin-left: 12px 22px; font-size: 30px;">Thông tin truyện</h1>
+<form action="detailController" method="post" enctype="multipart/form-data">
 	<div id="content">
 	            <div class="row mt-32 upload">
 	                <div class="col-4">
 	                    <div class="card upload-img ">
-	                        <img id="uploaded-image" src="Resource/img/upload-default.png" class="card-img-top" alt="...">
-		                <input name="cover" type="file"/>
+	                        <%
+			                     String imgPath = "";
+			                     ImageDAO dao = new ImageDAO();
+			                     
+			                     HttpSession storySessionGet = request.getSession();
+			             		  int storyId = (Integer) storySessionGet.getAttribute("storyId");
+			                     try {
+			                         imgPath = dao.getImagePath(storyId);
+			                     } catch (Exception e){
+			             			e.printStackTrace();
+			             		}
+							%>
+							<img src="<%= request.getContextPath() + "/" + imgPath %>" alt="Image">
 			            </div>
 			        </div>
 	        
@@ -34,7 +46,7 @@
 		                    <label for="inputStoryname" class="intro-sn col-form-label">Tên truyện</label>
 		                </div>
 		                <div class="col-9 col-sm-9">
-		                  <input name="name_story" type="text" class="form-control" id="inputStoryname">
+		                  <p>${name_story}</p>
 		                </div>
 		            </div>
 		            <div class=" mb-1 align-items-center row">
@@ -42,43 +54,29 @@
 		                    <label for="inputAuthor" class="col-form-label">Tác giả</label>
 		                </div>
 		                <div class="col-9 col-sm-9">
-		                    <input name="author" type="text" class="form-control" id="inputAuthor">
+		                	<p>${author}</p>
 		                </div>
 		            </div>
-			            <div class="mb-1">
-			                <form action="" method="get">
-			                    <div>
-			                        <label class="mrb-6" for="category">Tag</label>
-		                            <%
-		                            hashtagDAO dao = new hashtagDAO();
-		                        	ArrayList<Hashtag> tags = new ArrayList<Hashtag>();
-		                        	tags = dao.getTag();
-		                        	%>
-		                            <select name="tag" id="tag" multiple>
-									    <% for (Hashtag tag : tags) { %>
-									        <option value="<%= tag.getTagId() %>"><%= tag.getTagName() %></option>
-									    <% } %>
-									</select>
-		                    </div>
-		                </form>
-		            </div>
-	            <div class="mb-1">
-	                <p>Nội dung</p>
-	                <textarea class="form-control mt-8" id="exampleFormControlTextarea1" rows="5"></textarea>
-	            </div>
+		            
 	        </div>
+	        
 
 	    </div>
-	    <div class="text-center mt-16">
-	    	<button class="btn btn-primary">Đăng truyện</button>
-	    </div>
 	</div>
-	</form>        
+	<div class="text-center mt-16">
+	    <form action="uploadChapterController" method="post">
+	        <input type="submit" value="Thêm chương" class="btn btn-primary">
+	    </form>
+	    <!-- <form action="updateStory" method="post">
+	        <input type="submit" value="Cập nhật thông tin truyện" class="btn btn-secondary">
+	    </form>
+	    <form action="deleteStory" method="post">
+	        <input type="submit" value="Xóa truyện" class="btn btn-danger">
+	    </form> -->
+	</div>
+	</form>    
+	  
         
     <%@include file="footer.jsp" %>
-    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.0/dist/js/multi-select-tag.js"></script>
-    <script>
-    	new MultiSelectTag('tag')  // id
-	</script>
 </body>
 </html>

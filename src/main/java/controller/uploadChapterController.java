@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,7 +28,7 @@ import DTO.StoryPage;
 @MultipartConfig
 public class uploadChapterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final String SAVE_DIR = "user";
+    private static final String SAVE_DIR = "Resource/data/user";
     
     public uploadChapterController() {
         super();
@@ -39,62 +40,47 @@ public class uploadChapterController extends HttpServlet {
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // handle multiple file upload
+    	Part filePart = request.getPart("chaptercover"); // Retrieves <input type="file" name="chaptercover">
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+        String appPath = request.getServletContext().getRealPath("");
+        String savePath = appPath + File.separator + SAVE_DIR;
+        
+        File fileSaveDir = new File(savePath);
+        if (!fileSaveDir.exists()) {
+            fileSaveDir.mkdir();
+        }
+        
+        filePart.write(savePath + File.separator + fileName);
+
+        request.setAttribute("filePath", SAVE_DIR + File.separator + fileName);
+        
+        String chapterName = request.getParameter("name_chapter");
+		int chapterNumber = Integer.parseInt(request.getParameter("chapternumber"));
+		
+		// Create a new Chapter object
+		Chapter chapter = new Chapter();
+		storyDAO dao = new storyDAO();
+		
+		// Store the storyId in a session attribute
+		HttpSession storySessionGet = request.getSession();
+		int storyId = (Integer) storySessionGet.getAttribute("storyId");
+
+		String chapterId = UUID.randomUUID().toString();
+		chapter.setChapterId(chapterId);
+		chapter.setStoryId(storyId);
+		chapter.setChapterName(chapterName);
+		chapter.setChapterNumber(chapterNumber);
+		
+		// Store the chapterId in a session attribute (pass to uploadpage)
+        HttpSession storySessionSet = request.getSession();
+        storySessionSet.setAttribute("chapterId", chapter.getChapterId());
 		try {
-			String chapterName = request.getParameter("name_chapter");
-			
-			HttpSession session = request.getSession();
-			int storyId = (Integer) session.getAttribute("storyId");
-
-			Chapter chapter = new Chapter();
-			StoryPage page = new StoryPage();
-
-			storyDAO dao = new storyDAO();
-
-			String chapterId = UUID.randomUUID().toString();
-			chapter.setChapterId(chapterId);
-			chapter.setStoryId(storyId);
-			chapter.setChapterName(chapterName);
-			
-			try {
-				dao.inputChapter(chapter);
-			} catch (ClassNotFoundException | SQLException | ParseException e) {
-				e.printStackTrace();
-			}
-			
-			// Get all the parts from the request
-			List<Part> fileParts = request.getParts().stream().filter(part -> "content[]".equals(part.getName())).collect(Collectors.toList()); // Retrieves <input type="file" name="content[]">
-			
-			for (Part filePart : fileParts) {
-				String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-				String appPath = request.getServletContext().getRealPath("");
-				String savePath = appPath + File.separator + SAVE_DIR;
-				
-				File fileSaveDir = new File(savePath);
-				if (!fileSaveDir.exists()) {
-					fileSaveDir.mkdir();
-				}
-				
-				filePart.write(savePath + File.separator + fileName);
-
-				request.setAttribute("filePath", savePath + File.separator + fileName);
-				
-				int maxPageNumber = dao.getMaxPageNumber();
-				
-				page.setPageId(UUID.randomUUID().toString());
-				page.setChapterId(chapter.getChapterId());
-				page.setPageContent(savePath + File.separator + fileName);
-				page.setPageNumber(maxPageNumber);
-				
-				try {
-					dao.inputStoryPage(page);
-				} catch (ClassNotFoundException | SQLException | ParseException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		catch (ClassNotFoundException | SQLException e) {
+			dao.inputChapter(chapter);
+		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			e.printStackTrace();
 		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/upload-page.jsp");
+        rd.forward(request, response);
     }
 }
