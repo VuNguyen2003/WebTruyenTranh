@@ -49,23 +49,3 @@
 .special {
   background-color: #F08080;
 }
-
-.list-chapter nav {
-  border: solid 1px #ddd;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-.list-chapter nav ul li {
-  border-bottom: 1px dashed #ddd;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  padding: 6px 0;
-  margin: 0;
-}
-
-.list-chapter nav ul li > div.chapter-list a {
-  font-size: 20px;
-  color: #000;
-  text-decoration: none;
-}
