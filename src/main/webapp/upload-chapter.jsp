@@ -3,6 +3,7 @@
 <%@ page import="DAO.*" %>
 <%@ page import="DTO.*" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,8 +23,20 @@
           <div class="row mt-32 upload">
               <div class="col-4">
                   <div class="card upload-img ">
-                      <img id="story-image" src="Resource/img/upload-default.png" class="card-img-top" alt="...">
-               <input name="chaptercover" type="file" multiple/>
+                      <%
+                      String imgPath = "";
+                      ImageDAO dao = new ImageDAO();
+                      
+                      HttpSession storySessionGet = request.getSession();
+              		  int storyId = (Integer) storySessionGet.getAttribute("storyId");
+                      try {
+                          imgPath = dao.getImagePath(storyId);
+                      } catch (Exception e){
+              			e.printStackTrace();
+              		}
+					%>
+					<img src="<%= request.getContextPath() + "/" + imgPath %>" alt="Image">
+               <input name="chaptercover" type="file"/>
             </div>
         </div>
       

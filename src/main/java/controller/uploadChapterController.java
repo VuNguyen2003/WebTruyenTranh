@@ -42,7 +42,7 @@ public class uploadChapterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Part filePart = request.getPart("chaptercover"); // Retrieves <input type="file" name="chaptercover">
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-        String appPath = "D:\\Desktop\\Code Projects\\JavaServerPage\\WebTruyenTranh\\src\\main\\webapp";
+        String appPath = request.getServletContext().getRealPath("");
         String savePath = appPath + File.separator + SAVE_DIR;
         
         File fileSaveDir = new File(savePath);
@@ -52,7 +52,7 @@ public class uploadChapterController extends HttpServlet {
         
         filePart.write(savePath + File.separator + fileName);
 
-        request.setAttribute("filePath", savePath + File.separator + fileName);
+        request.setAttribute("filePath", SAVE_DIR + File.separator + fileName);
         
         String chapterName = request.getParameter("name_chapter");
 		int chapterNumber = Integer.parseInt(request.getParameter("chapternumber"));
@@ -64,16 +64,16 @@ public class uploadChapterController extends HttpServlet {
 		// Store the storyId in a session attribute
 		HttpSession storySessionGet = request.getSession();
 		int storyId = (Integer) storySessionGet.getAttribute("storyId");
-		
-		// Store the chapterId in a session attribute (pass to uploadpage)
-        HttpSession storySessionSet = request.getSession();
-        storySessionSet.setAttribute("chapterId", chapter.getChapterId());
 
 		String chapterId = UUID.randomUUID().toString();
 		chapter.setChapterId(chapterId);
 		chapter.setStoryId(storyId);
 		chapter.setChapterName(chapterName);
 		chapter.setChapterNumber(chapterNumber);
+		
+		// Store the chapterId in a session attribute (pass to uploadpage)
+        HttpSession storySessionSet = request.getSession();
+        storySessionSet.setAttribute("chapterId", chapter.getChapterId());
 		try {
 			dao.inputChapter(chapter);
 		} catch (ClassNotFoundException | SQLException | ParseException e) {

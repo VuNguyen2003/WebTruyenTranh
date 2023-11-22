@@ -44,13 +44,13 @@ public class uploadStoryPageController extends HttpServlet {
 			StoryPage page = new StoryPage();
 			storyDAO dao = new storyDAO();
 			// Get all the parts from the request
-			List<Part> fileParts = request.getParts().stream().filter(part -> "content[]".equals(part.getName())).collect(Collectors.toList()); // Retrieves <input type="file" name="content[]">
+			List<Part> fileParts = request.getParts().stream().filter(part -> "page[]".equals(part.getName())).collect(Collectors.toList()); // Retrieves <input type="file" name="content[]">
 			HttpSession storySessionGet = request.getSession();
 			String chapterId = (String) storySessionGet.getAttribute("chapterId");
 			
 			for (Part filePart : fileParts) {
 				String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-				String appPath = "D:\\Desktop\\Code Projects\\JavaServerPage\\WebTruyenTranh\\src\\main\\webapp";
+				String appPath = request.getServletContext().getRealPath("");
 		        String savePath = appPath + File.separator + SAVE_DIR;
 				
 				File fileSaveDir = new File(savePath);
@@ -79,5 +79,7 @@ public class uploadStoryPageController extends HttpServlet {
 		catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		RequestDispatcher rd = request.getRequestDispatcher("/detail-comic.jsp");
+        rd.forward(request, response);
     }
 }

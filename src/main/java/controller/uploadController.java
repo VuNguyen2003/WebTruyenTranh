@@ -99,6 +99,7 @@ public class uploadController extends HttpServlet {
 				e.printStackTrace();
 			}
         }
+        /*
         User user = new User();
         Post post = new Post();
         post.setUserId(user.getUserID());
@@ -110,7 +111,7 @@ public class uploadController extends HttpServlet {
 			e.printStackTrace();
 		}
         System.out.println("Upload success!");
-        
+        */
         RequestDispatcher rd = request.getRequestDispatcher("/detail-comic.jsp");
         rd.forward(request, response);
     }

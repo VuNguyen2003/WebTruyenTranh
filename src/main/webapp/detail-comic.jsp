@@ -24,7 +24,19 @@
 	            <div class="row mt-32 upload">
 	                <div class="col-4">
 	                    <div class="card upload-img ">
-	                        <img id="uploaded-image" src="Resource/img/upload-default.png" class="card-img-top" alt="...">
+	                        <%
+			                     String imgPath = "";
+			                     ImageDAO dao = new ImageDAO();
+			                     
+			                     HttpSession storySessionGet = request.getSession();
+			             		  int storyId = (Integer) storySessionGet.getAttribute("storyId");
+			                     try {
+			                         imgPath = dao.getImagePath(storyId);
+			                     } catch (Exception e){
+			             			e.printStackTrace();
+			             		}
+							%>
+							<img src="<%= request.getContextPath() + "/" + imgPath %>" alt="Image">
 			            </div>
 			        </div>
 	        
