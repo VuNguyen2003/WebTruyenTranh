@@ -26,7 +26,7 @@ import DTO.User;
 @MultipartConfig
 public class uploadController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String SAVE_DIR = "Resource/data/user";
+    private static final String SAVE_DIR = "user";
 
     public uploadController() {
         super();
@@ -41,7 +41,7 @@ public class uploadController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("cover"); // Retrieves <input type="file" name="cover">
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-        String appPath = "D:\\Desktop\\Code Projects\\JavaServerPage\\WebTruyenTranh\\src\\main\\webapp";
+        String appPath = request.getServletContext().getRealPath("");
         String savePath = appPath + File.separator + SAVE_DIR;
 
         File fileSaveDir = new File(savePath);
@@ -110,10 +110,8 @@ public class uploadController extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			e.printStackTrace();
 		}
-        System.out.println("Upload success!");
         */
-        RequestDispatcher rd = request.getRequestDispatcher("/detail-comic.jsp");
-        rd.forward(request, response);
+        System.out.println("Upload success!");
     }
 
 }
