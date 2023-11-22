@@ -1,3 +1,5 @@
+<%@page import="DTO.Story"%>
+<%@page import="DTO.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
@@ -118,6 +120,38 @@
                     	</nav>
                     </c:forEach>
                 </div>
+            	<div class="tab-content mt-16">
+                    <div id="aw_comments" class="tab-pane  in active">
+                        <div class="comment-wrapper">
+                        	<form action="comment" method="post">
+	                            <div class="form-floating">
+	                                <textarea name="comment" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 70px"></textarea>
+	                                <label for="floatingTextarea">Mời các bạn thảo luận, vui lòng không spam</label>
+	                            </div>
+	                            <div class="btn-send-cmt row mt-8">
+	                                <div class="col-12">
+	                                    <button type="submit" class="btn btn-primary send-btn pull-right">Gửi</button>
+	                                </div>
+	                            </div>
+                            </form>
+                            <div class="comment-list">
+                                <div class="item ">
+                                    <div class="summary">
+                                        <i class="fa-solid fa-angle-left fa-arrow"></i>
+                                        <div class="info">
+                                            <div class="comment-header">
+                                                <span class="authorname">Monkey D.Luffy</span>
+                                            </div>
+                                            <div class="comment-content">
+                                                Không có biết
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 		
@@ -144,7 +178,6 @@
 	        }
 	    }
 	    %>
-    
     
 </body>
 </html>
