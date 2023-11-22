@@ -143,13 +143,13 @@ public class storyDAO {
 			System.out.println("Executing inputChapter...");
 		}
 		try {
-			String sql = "INSERT INTO CHAPTER (CHAPTERID, STORYID, CHAPTERNAME, CHAPTERNUMBER) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO CHAPTER (CHAPTERID, STORYID, CHAPTERNAME) VALUES (?, ?, ?)";
 			preparedStmt = conn.prepareStatement(sql);
 			
 			preparedStmt.setString(1, chapter.getChapterId());
 			preparedStmt.setInt(2, chapter.getStoryId());
 			preparedStmt.setString(3, chapter.getChapterName());
-			preparedStmt.setInt(4, chapter.getChapterNumber());
+			
 			preparedStmt.executeUpdate();
 		}
 		catch (Exception e){
