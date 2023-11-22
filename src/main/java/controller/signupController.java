@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import DAO.userDAO;
 import DTO.User;
@@ -25,7 +24,7 @@ public class signupController extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("signup.jsp").forward(request, response);
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,11 +37,9 @@ public class signupController extends HttpServlet {
 		try {
 			response.setContentType("text/html"); 
 			response.setCharacterEncoding("UTF-8");
-			request.removeAttribute("msg");
-			
 			if(!password.equals(passwordcf)) {
 				System.out.println("Đăng ký thất bại");
-				request.setAttribute("msg", "fail");
+				request.getRequestDispatcher("signup.jsp").include(request, response);
 			}
 			else {
 				User newUser = new User();
@@ -56,16 +53,17 @@ public class signupController extends HttpServlet {
 				newUser.setPhoneNumber("");
 				newUser.setEmail(email);
 				newUser.setHomeAddress("");
-
 				u.insertUser(newUser);
 				String path = "Resource/data/user/" + username;
 				File directory = new File(path);
 				if (!directory.exists()) {
 					directory.mkdir();
 				}
-				request.setAttribute("msg", "success");
+				System.out.println("Đăng ký thành công");
+				request.setAttribute("alertMsg", "Đăng ký thành công");
+				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+				rd.forward(request,response);
 			}
-			request.getRequestDispatcher("signup.jsp").forward(request,response);
 		}
 		catch(Exception e) {
 			

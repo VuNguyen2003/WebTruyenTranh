@@ -49,12 +49,17 @@
                                 <i class="fa-solid fa-angle-down angle-icon"></i>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="">CATEGORY</a></li>
+                                <li><a href="category">CATEGORY</a></li>
                                 <li><a href="hastagsearch">ADVANCE SEARCH</a></li>
-                                <li><a href="">FAVORITE</a></li>
+                                <li><a href="favorite">FAVORITE</a></li>
                             </ul>
                         </li>
-                        <li><a href="upload.jsp">UPLOAD</a></li>
+                        <%-- <% if (user != null) { %>
+						    <li><a href="upload.jsp">UPLOAD</a></li>
+						<% } else { %>
+						    <li><a href="login.jsp">UPLOAD</a></li>
+						<% } %> --%>
+						<li><a href="upload.jsp">UPLOAD</a></li>
                         <li><a href="Policy.html">POLICY</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="per-info.html">SETTING</a></li>

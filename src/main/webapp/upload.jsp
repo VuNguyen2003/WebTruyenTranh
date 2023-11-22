@@ -59,9 +59,9 @@
 									        <option value="<%= tag.getTagId() %>"><%= tag.getTagName() %></option>
 									    <% } %>
 									</select>
-	                    </div>
-	                </form>
-	            </div>
+		                    </div>
+		                </form>
+		            </div>
 	            <div class="mb-1">
 	                <p>Nội dung</p>
 	                <textarea class="form-control mt-8" id="exampleFormControlTextarea1" rows="5"></textarea>
@@ -69,20 +69,7 @@
 	        </div>
 
 	    </div>
-	    <div class="upload-chapter">
-	        <div class="list-chapter" id="nt_listchapter">
-	            <h2 class="list-title clearfix mt-16">
-	                <i class="fa-solid fa-list"></i>
-	                Danh sách chương
-	            </h2>
-	            <div class="row heading">
-	                <a class="col-4 no-wrap" href="upload-chapter.html">
-	                    <i class="fa-solid fa-plus"></i>
-	                    Thêm chương</a>
-	            </div>
-	        </div>
-	    </div>
-	    <div class="text-center">
+	    <div class="text-center mt-16">
 	    	<button class="btn btn-primary">Đăng truyện</button>
 	    </div>
 	</div>

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Giới thiệu truyện</title>
-        <link rel="stylesheet" href="CSS/style.css">
+        <link rel="stylesheet" href="Resource/css/style.css">
         <link rel="icon" href="https://flyclipart.com/favicon.png" type="image/x-icon/png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" integrity="sha512-IJEbgDEF7OeKJRa0MY2PApnyJHRIsgzCveek4ec8VWQ+7KG3ZSKVNYa5xP/Gh0hVP0Mwb+gBsk+GwR3JQGhQNg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -36,7 +37,9 @@
                                         <i class="fa-solid fa-chevron-left"></i>
                                     </a>
                                     <select name="ct100$mainContent$ddlSelectChapter" id="ct100_mainContent_ddlSelectChapter" class="select-chapter">
-                                        <option value="">Chapter ...</option>
+                                        <option value="">Chapter 1</option>
+                                        <option value="">Chapter 2</option>
+                                        <option value="">Chapter 3</option>
                                     </select>
                                     <a href="#" class="next a_next">
                                         <i class="fa-solid fa-chevron-right"></i>
@@ -45,12 +48,11 @@
                                 </div>
                             </div>
                             <div class="reading-detail box_doc mt-16">
-                                <div class="page-chapter" id="page_1">
-                                    <img src="/img/images/001.jpg" alt="Đảo Hải Tặc chap 1045 - Trang 1" data-index = "1">
-                                </div>
-                                <div class="page-chapter" id="page_2">
-                                    <img src="/img/images/002.jpg" alt="Đảo Hải Tặc chap 1045 - Trang 2" data-index = "2">
-                                </div>
+                            	<c:forEach var="i" items ="${pageList}" >
+	                                <div class="page-chapter" id="page_1">
+	                                    <img src="${i.getPageContent()}" alt="Đảo Hải Tặc chap 1045 - Trang 1" data-index = "1">
+	                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

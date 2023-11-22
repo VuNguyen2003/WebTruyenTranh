@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
+
 import DTO.*;
 
 
@@ -16,6 +18,8 @@ import DTO.*;
 public class storyDAO {
 	Connection conn = null;
 	PreparedStatement preparedStmt = null;
+	
+	String chapterID = UUID.randomUUID().toString();
 	
 	// get storyId tránh lặp khóa
 	public int getMaxStoryId() throws SQLException, ClassNotFoundException {
@@ -30,6 +34,20 @@ public class storyDAO {
 	        maxStoryId = rs.getInt("MAX_ID");
 	    }
 	    return maxStoryId;
+	}
+
+	public int getMaxPageNumber() throws SQLException, ClassNotFoundException {
+	    int maxPageNumber = 0;
+	    if(conn == null) {
+	        conn = ConnectionClass.initializeDatabase();
+	    }
+	    String sql = "SELECT MAX(PAGENUMBER) AS MAXPAGENUMBER FROM STORYPAGE";
+	    preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+	    ResultSet rs = preparedStmt.executeQuery();
+	    if (rs.next()) {
+	    	maxPageNumber = rs.getInt("MAXPAGENUMBER");
+	    }
+	    return maxPageNumber;
 	}
 
 	// đưa dữ liệu vào bảng story
@@ -55,14 +73,13 @@ public class storyDAO {
 			preparedStmt.setString(8,story.getSummary());
 			preparedStmt.setString(9,story.getStatus());
 			preparedStmt.execute();
-			System.out.println(sql);
 	    }
 		catch (Exception e){
 			e.printStackTrace();
 		}
 	}
 	
-	// đưa dữ liệu vào bảng hashtag
+	// đưa dữ liệu vào bảng Find
 	public void inputFind(Find find) throws ClassNotFoundException, SQLException, ParseException {
 		if(conn == null) {
 			conn = ConnectionClass.initializeDatabase();
@@ -75,6 +92,66 @@ public class storyDAO {
 			preparedStmt.setInt(2,find.getTagId());
 			
 			preparedStmt.execute();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void inputPost(Post post) throws ClassNotFoundException, SQLException, ParseException {
+		if(conn == null) {
+			conn = ConnectionClass.initializeDatabase();
+		}
+		try {
+			String sql = "INSERT INTO FIND(STORYID, TAGID) VALUES (?,?)";
+			preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+			
+			preparedStmt.setInt(1,post.getUserId());
+			preparedStmt.setInt(2,post.getStoryId());
+			
+			preparedStmt.execute();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void inputStoryPage(StoryPage page) throws ClassNotFoundException, SQLException, ParseException {
+	    if(conn == null) {
+	        conn = ConnectionClass.initializeDatabase();
+	        System.out.println("Executing inputStoryPage...");
+	    }
+	    try {
+	        String sql = "INSERT INTO STORYPAGE(PAGEID, CHAPTERID, PAGECONTENT, PAGENUMBER) VALUES (?,?,?,?)";
+	        preparedStmt = (PreparedStatement) conn.prepareStatement(sql);
+	        
+	        preparedStmt.setString(1,page.getPageId());
+	        preparedStmt.setString(2,page.getChapterId());
+	        preparedStmt.setString(3,page.getPageContent());
+	        preparedStmt.setInt(4, page.getPageNumber());
+	        
+	        preparedStmt.execute();
+	    }
+	    catch (Exception e){
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void inputChapter(Chapter chapter) throws ClassNotFoundException, SQLException, ParseException {
+		if(conn == null) {
+			conn = ConnectionClass.initializeDatabase();
+			System.out.println("Executing inputChapter...");
+		}
+		try {
+			String sql = "INSERT INTO CHAPTER (CHAPTERID, STORYID, CHAPTERNAME, CHAPTERNUMBER) VALUES (?, ?, ?, ?)";
+			preparedStmt = conn.prepareStatement(sql);
+			
+			preparedStmt.setString(1, chapter.getChapterId());
+			preparedStmt.setInt(2, chapter.getStoryId());
+			preparedStmt.setString(3, chapter.getChapterName());
+			preparedStmt.setInt(4, chapter.getChapterNumber());
+			
+			preparedStmt.executeUpdate();
 		}
 		catch (Exception e){
 			e.printStackTrace();
@@ -334,6 +411,42 @@ public class storyDAO {
     	return story;
     }
     
+    public ArrayList<Story> topStory() throws ClassNotFoundException, SQLException{
+		ArrayList<Story> list = new ArrayList<Story>();
+		if(conn == null)
+			conn = ConnectionClass.initializeDatabase();
+		String sql = "Select * from STORY ORDER BY FAVORITE DESC LIMIT 10";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		ResultSet rs = pstm.executeQuery();
+		while (rs.next()) {
+			int storyId = rs.getInt("STORYID");
+			String title = rs.getString("TITLE");
+			Date uploadDate = rs.getDate("UPLOADDATE");
+			//format lại ngày tháng thành kiểu string "ngày/tháng/năm"
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			String strDate = dateFormat.format(uploadDate);
+			float rating = rs.getFloat("RATING");
+			String cover = rs.getString("COVER");
+			int favorite = rs.getInt("FAVORITE");
+			String author = rs.getString("AUTHOR");
+			String summary = rs.getString("SUMMARY");
+			String status = rs.getString("STATUS");
+			Story story = new Story();
+			story.setStoryId(storyId);
+			story.setTitle(title);
+			story.setUploadDate(strDate);
+			story.setRating(rating);
+			story.setCover(cover);
+			story.setFavorite(favorite);
+			story.setAuthor(author);
+			story.setSummary(summary);
+			story.setStatus(status);
+			//lưu lớp story vào list story
+			list.add(story);
+		}
+		return list;
+	}
+    
 	public static void main(String args[]) throws ClassNotFoundException, SQLException, ParseException {
 		ArrayList<Story> results = new ArrayList<Story>();
 		storyDAO dao = new storyDAO();
@@ -344,5 +457,7 @@ public class storyDAO {
         }
 		
 	}
+	
+	
 }
 
