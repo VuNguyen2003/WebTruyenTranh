@@ -119,7 +119,7 @@ public class storyDAO {
 	public void inputStoryPage(StoryPage page) throws ClassNotFoundException, SQLException, ParseException {
 	    if(conn == null) {
 	        conn = ConnectionClass.initializeDatabase();
-	        System.out.println("Executing inputStoryPage...");
+	        System.out.println("Executing innputStoryPage...");
 	    }
 	    try {
 	        String sql = "INSERT INTO STORYPAGE(PAGEID, CHAPTERID, PAGECONTENT, PAGENUMBER) VALUES (?,?,?,?)";

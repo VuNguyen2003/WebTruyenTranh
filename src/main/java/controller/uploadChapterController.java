@@ -6,9 +6,7 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,16 +18,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import DTO.Story;
 import DAO.storyDAO;
 import DTO.Chapter;
+import DTO.Story;
 import DTO.StoryPage;
 
 @WebServlet("/uploadChapterController")
 @MultipartConfig
 public class uploadChapterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final String SAVE_DIR = "Resource/data/user";
+    private static final String SAVE_DIR = "/user";
     
     public uploadChapterController() {
         super();
