@@ -5,34 +5,35 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class StoryPage implements Serializable{
 	private String pageId;
-    private String chapterId;
+    private int storyId;
     private String pageContent;
-    private int pageNumber;
+    private String chapter;
 
     public StoryPage() {
     }
 
-    public StoryPage(String pageId, String chapterId, String pageContent, int pageNumber) {
+    public StoryPage(String pageId, int storyId, String pageContent, String chapter) {
         this.pageId = pageId;
-        this.chapterId = chapterId;
+        this.storyId = storyId;
         this.pageContent = pageContent;
-        this.pageNumber = pageNumber;
+        this.chapter = chapter;
     }
+
     
     public String getPageId() {
         return pageId;
     }
 
-    public void setPageId(String pageid2) {
-        this.pageId = pageid2;
+    public void setPageId(String pageId) {
+        this.pageId = pageId;
     }
 
-    public String getChapterId() {
-        return chapterId;
+    public int getStoryId() {
+        return storyId;
     }
 
-    public void setChapterId(String chapterId) {
-        this.chapterId = chapterId;
+    public void setStoryId(int storyId) {
+        this.storyId = storyId;
     }
 
     public String getPageContent() {
@@ -42,12 +43,12 @@ public class StoryPage implements Serializable{
     public void setPageContent(String pageContent) {
         this.pageContent = pageContent;
     }
-    
-    public int getPageNumber() {
-    	return pageNumber;
+
+    public String getChapter() {
+        return chapter;
     }
-    
-    public void setPageNumber(int pageNumber) {
-    	this.pageNumber = pageNumber;
+
+    public void setChapter(String chapter) {
+        this.chapter = chapter;
     }
 }

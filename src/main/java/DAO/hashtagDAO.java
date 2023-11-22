@@ -35,21 +35,6 @@ public class hashtagDAO {
 		return listTag;
 	}
 	
-	public ArrayList<String> getTagStory(int StoryID) throws ClassNotFoundException, SQLException{
-		ArrayList<String> listTag = new ArrayList<String>();
-		if(conn == null) {
-			conn = ConnectionClass.initializeDatabase();
-		}
-		String sql = "Select TAGNAME from HASHTAG where TAGID in (select TAGID from FIND where STORYID in (?))";
-		PreparedStatement pstm = conn.prepareStatement(sql);
-		pstm.setInt(1,StoryID);
-		ResultSet rs = pstm.executeQuery();
-		//lấy cơ sở dữ liệu vào lớp Story
-		while (rs.next()) {
-			listTag.add(rs.getString(1));
-		}
-		return listTag;
-	}
 	
 	public static void main(String args[]) throws ClassNotFoundException, SQLException, ParseException {
 		hashtagDAO dao = new hashtagDAO ();

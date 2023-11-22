@@ -39,13 +39,10 @@ public class homeController extends HttpServlet{
 				endPage++;
 			}
 			ArrayList<Story> list = new ArrayList<Story>();
-			ArrayList<Story> Toplist = new ArrayList<Story>();
 			list = Story.getStory((Integer.parseInt(indexPage)-1)*20);
-			Toplist = Story.topStory();
 			request.setAttribute("indexPage", indexPage);
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("listStory", list);
-			request.setAttribute("topStory", Toplist);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} catch (Exception e) {}
 		

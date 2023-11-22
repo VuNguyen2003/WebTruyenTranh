@@ -2,7 +2,6 @@
 <%@page import="DTO.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page import = "java.sql.*" %>
 <%@ page import = "java.text.*" %>
 <%@ page import = "javax.servlet.http.*"%>
@@ -52,7 +51,7 @@
                     </div>
                     <div class="mb-1">
                         <label for="inputTag" class="form-label">Tag</label>
-                        <input type="text" class="form-control" id="inputTag" placeholder="${tags}" disabled>
+                        <input type="text" class="form-control" id="inputTag" placeholder="Action - Fantasy - Manhua - Shounen">
                     </div>
                     <div class="row g-2 align-items-center">
                         <div class="col-3">
@@ -62,7 +61,14 @@
                             <p> ${listStory.getStatus()}</p>
                         </div>
                     </div>
-                    
+                    <div class="row g-2 align-items-center">
+                        <div class="col-3">
+                            <label for="inputView" class="col-form-label">Lượt xem</label>
+                        </div>
+                        <div class="col-9">
+                            <p> 1000</p>
+                        </div>
+                    </div>
                     <div class="rating-box">
                         <div class="stars">
                             <div class="col-6 five-stars">
@@ -74,11 +80,16 @@
                             </div>
                             <div class="col-6 btn-next-star">
                                 <button type="button" class="btn btn-primary btn-sm btn-fav">Yêu thích</button>
+                                <button type="button" class="btn btn-primary btn-sm btn-rp">Báo cáo</button>
                             </div>
                         </div>
                     </div>
                     <div class="btn-read mt-16">
-                        <a class="btn btn-warning" href="readstory?chapterID=onepice2">Đọc từ đầu</a>
+                        <a class="btn btn-warning " href="">Đọc từ đầu</a>
+                        <a class="btn btn-warning " href="">Đọc mới nhất</a>
+                        <a class="btn btn-danger " href="read-comic.html">Đọc tiếp
+                            <i class="fa-solid fa-angle-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -103,22 +114,10 @@
                         Danh sách chương
                     </h2>
                     <div class="row heading">
-                        <div class="col text-center no-wrap">Số chương</div>
-                        
+                        <div class="col-4 no-wrap">Số chương</div>
+                        <div class="col-4 no-wrap text-center">Cập nhật</div>
+                        <div class="col-4 no-wrap text-center">Lượt xem</div>
                     </div>
-                    <c:forEach var="i" items ="${listChapter}" >
-                        <nav>
-	                        <ul>
-	                            <li class="row">
-	                                <div class="col no-wrap text-center chapter-list">
-	                                    <a href="readstory?ID=${listStory.getStoryId()}&chapterID=${i.getChapterId()}&indexPage=${i.getChapterNumber()}">
-	                                        Chapter ${i.getChapterNumber()}: ${i.getChapterName()}
-	                                    </a>
-	                                </div>
-	                            </li>
-	                        </ul>
-                    	</nav>
-                    </c:forEach>
                 </div>
             	<div class="tab-content mt-16">
                     <div id="aw_comments" class="tab-pane  in active">
@@ -164,7 +163,7 @@
 	    try {
 	        Class.forName("com.mysql.jdbc.Driver");
 	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ratings", "username", "password");
-	        stmt = conn.prepareStatement("INSERT INTO ratings VALUES (?)");
+	        stmt = conn.prepareStatement("INSERT INTO ratings (rating) VALUES (?)");
 	        stmt.setString(1, rating);
 	        stmt.executeUpdate();
 	    } catch (Exception e) {

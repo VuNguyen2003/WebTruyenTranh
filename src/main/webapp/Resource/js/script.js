@@ -13,9 +13,3 @@ stars.forEach((star, index1) => {
     });
     
 });
-
-const btnEl = document.querySelector('.btn-fav');
-
-btnEl.addEventListener('click', () => {
-    btnEl.classList.add('special');
-});
