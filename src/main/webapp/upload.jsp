@@ -23,8 +23,8 @@
 	            <div class="row mt-32 upload">
 	                <div class="col-4">
 	                    <div class="card upload-img ">
-	                        <img id="uploaded-image" src="Resource/img/upload-default.png" class="card-img-top" alt="...">
-		                <input name="cover" type="file"/>
+	                        <img id="uploaded-image" src="Resource/img/images/${story.getCover()}" class="card-img-top" alt="...">
+		                	<input name="cover" type="file"/>
 			            </div>
 			        </div>
 	        
