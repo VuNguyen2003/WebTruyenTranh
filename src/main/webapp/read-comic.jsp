@@ -33,15 +33,13 @@
                                     <a class="home backward" href="intro-comic.html" title="Đảo Hải Tặc">
                                         <i class="fa-solid fa-list"></i>
                                     </a>
-                                    <a href="#" class="prev a_prev">
+                                    <a href="readstory?ID=${ID}&index=${indexPage == 1? indexPage : indexPage - 1}" class="prev a_prev" >
                                         <i class="fa-solid fa-chevron-left"></i>
                                     </a>
                                     <select name="ct100$mainContent$ddlSelectChapter" id="ct100_mainContent_ddlSelectChapter" class="select-chapter">
-                                        <option value="">Chapter 1</option>
-                                        <option value="">Chapter 2</option>
-                                        <option value="">Chapter 3</option>
+                                        <option value="">Chapter ${indexPage}</option>
                                     </select>
-                                    <a href="#" class="next a_next">
+                                    <a href="readstory?ID=${ID}&index=${indexPage + 1 > chapterlist.size()? indexPage : indexPage + 1}" class="next a_next">
                                         <i class="fa-solid fa-chevron-right"></i>
                                     </a>
                                     

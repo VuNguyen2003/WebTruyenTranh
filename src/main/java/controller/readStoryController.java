@@ -28,11 +28,11 @@ public class readStoryController extends HttpServlet{
 		ArrayList<Chapter> chapterlist = new ArrayList<Chapter>();
 		try {
 			chapterlist = chapter.getChapterList(Integer.parseInt(StoryID));
-			pagelist = page.getStoryPage(chapterID);
+			pagelist = page.getStoryPage(StoryID, Integer.parseInt(indexPage));
 			request.setAttribute("pageList",pagelist);
 			request.setAttribute("chapterlist",chapterlist);
 			request.setAttribute("indexPage",indexPage);
-			request.setAttribute("ID",chapterID);
+			request.setAttribute("ID",StoryID);
 			request.getRequestDispatcher("read-comic.jsp").forward(request, response);
 		} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
 			

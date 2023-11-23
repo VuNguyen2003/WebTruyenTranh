@@ -15,13 +15,14 @@ public class storypageDAO {
 	PreparedStatement preparedStmt = null;
 	
 	
-	public ArrayList<StoryPage> getStoryPage(String ChapterID) throws ClassNotFoundException, SQLException{
+	public ArrayList<StoryPage> getStoryPage(String ChapterID , int Chapternumb) throws ClassNotFoundException, SQLException{
 		ArrayList<StoryPage> list = new ArrayList<StoryPage>();
 		if(conn == null)
 			conn = ConnectionClass.initializeDatabase();
-		String sql = "Select * from STORYPAGE Where CHAPTERID = ?";
+		String sql = "Select * from STORYPAGE Where CHAPTERID = (select CHAPTERID  from CHAPTER where STORYID = ? and CHAPTERNUMBER = ?)";
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		pstm.setString(1,ChapterID);
+		pstm.setInt(2,Chapternumb);
 		ResultSet rs = pstm.executeQuery();
 		while(rs.next()) {
 			StoryPage story = new StoryPage();
@@ -39,16 +40,6 @@ public class storypageDAO {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
-		ArrayList<StoryPage> list = new ArrayList<StoryPage>();
-		storypageDAO dao = new storypageDAO();
-		try {
-			list = dao.getStoryPage("onepice2");
-			for(StoryPage e : list) {
-				System.out.println(e.getPageContent());
-			}
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			
-		}
+		
     }
 }
