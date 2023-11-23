@@ -40,7 +40,7 @@ public class loginController extends HttpServlet {
 			if(ud.checkExitAccount(username, password)) {
 				s.setAttribute("mem",user);
 				s.setAttribute("msg","signin");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("home").forward(request, response);
 			}
 			else {
 				s.setAttribute("invalid","invalid");

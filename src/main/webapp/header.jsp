@@ -22,7 +22,7 @@
                     if (msg != null){ %>
 	                    <ul class="header-account">
 	                        <li class="account-item">
-	                            <a class="mr-3" href= "per-info.jsp"><i class="fa-regular fa-id-card"></i>${ mem.getUsername()}</i></a>
+	                            <a class="mr-3" href= "per-info.jsp"><i class="fa-regular fa-id-card">${ mem.getUsername()}</i></a>
 	                        </li>
 	                        <li class="account-item">
 	                            <a id="Sign-up" class="account-item-link" href="logout">Log out</a>

@@ -4,6 +4,13 @@
 <%@ page import = "java.sql.*" %>
 <%@ page import = "java.text.*" %>
 <%@ page import = "javax.servlet.http.*"%>
+<%@ page import = "java.util.ArrayList"%>
+<%@ page import = "DAO.*"%>
+<%@ page import = "DTO.*"%>
+<%@ page import = "java.awt.event.ActionEvent"%>
+<%@ page import = "java.awt.event.ActionListener"%>
+<%@ page import = "javax.swing.JButton"%>
+<%@ page import = "javax.swing.JOptionPane"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,6 +80,8 @@
                             <div class="col-6 btn-next-star">
                                 <button type="button" class="btn btn-primary btn-sm btn-fav">Yêu thích</button>
                             </div>
+                            <input name="strId" value = "${listStory.getStoryId()}" style="display:none">
+                            
                         </div>
                     </div>
                     <div class="btn-read mt-16">
@@ -118,33 +127,55 @@
                     </nav>
                     </c:forEach>
                 </div>
+                <div class="tab-content mt-16">
+                    <div id="aw_comments" class="tab-pane  in active">
+                    <form action="comment" method="post">
+                        <div class="comment-wrapper">
+                            <div class="form-floating">
+                                <textarea name="comment" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 70px"></textarea>
+                                <label for="floatingTextarea">Mời các bạn thảo luận, vui lòng không spam</label>
+                            </div>
+                            <div class="btn-send-cmt row mt-8">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary send-btn pull-right">Gửi</button>
+                                </div>
+                            </div>
+                            <input name="strId" value = "${listStory.getStoryId()}" style="display:none">
+                            <%commentDAO cdao = new commentDAO();
+                            ArrayList<Comment> cmts = cdao.listComments();
+                            %>
+                            <c:forEach var="cmt" items="<%=cmts%>" end="9">
+        						<div class="comment-list">
+                                <div class="item ">
+                                    <div class="summary">
+                                        <i class="fa-solid fa-angle-left fa-arrow"></i>
+                                        <div class="info">
+                                            <div class="comment-header">
+                                                <span class="authorname">${cmt.getUsername()}</span>
+                                            </div>
+                                            <div class="comment-content">
+                                                ${cmt.getComment()}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    						</c:forEach>
+                        </div>
+                    </form>
+                    </div>
+                </div>
             </div>
         </div>
 		
         <%@include file="footer.jsp" %>
-    <script src="Resource/js/script.js"></script>
-    <%
-	    String rating = request.getParameter("rating");
-	    Connection conn = null;
-	    PreparedStatement stmt = null;
-	    try {
-	        Class.forName("com.mysql.jdbc.Driver");
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ratings", "username", "password");
-	        stmt = conn.prepareStatement("INSERT INTO ratings VALUES (?)");
-	        stmt.setString(1, rating);
-	        stmt.executeUpdate();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    } finally {
-	        if (stmt != null) {
-	            stmt.close();
-	        }
-	        if (conn != null) {
-	            conn.close();
-	        }
-	    }
-	    %>
-    
+    <script src="Resource/js/script.js"></script>s
+    <script>
+	  var myButton = document.getElementById("myButton");
+	  myButton.addEventListener("click", function() {
+	    alert("Bạn đã nhấp vào nút Yêu thích!");
+	  });
+	</script>
     
 </body>
 </html>

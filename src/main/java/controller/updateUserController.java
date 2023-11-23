@@ -54,7 +54,7 @@ public class updateUserController extends HttpServlet {
 		System.out.println("fileName: "+fileName);
 		
 	    //lưu file ảnh vào server----------------------------------------
-		String uploadPath="D:\\HK5\\JAVA\\project\\WEBTRUYENTRANH\\WebTruyenTranh\\src\\main\\webapp\\images\\"+fileName;
+		String uploadPath="D:\\java\\doan\\WebTruyenTranh\\src\\main\\webapp\\images\\"+fileName;
 		try {
 			FileOutputStream fos = new FileOutputStream(uploadPath);
 			InputStream is = part.getInputStream();

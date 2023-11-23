@@ -89,7 +89,7 @@
         </div>
 		<ul class="pagination mt-32">
                 <li class="pagination-item">
-                    <a href="home?index=${indexPage > 1?indexPage-1:"1"}" class="pagination-item_link">
+                    <a href="home?index=${indexPage > 1?indexPage-1:1}" class="pagination-item_link">
                         <i class="pagination-item_icon fa-solid fa-angle-left"></i>
                     </a>
                 </li>
@@ -100,7 +100,7 @@
                	</c:forEach>
 
                 <li class="pagination-item">
-                    <a href="home?index=${indexPage + 1}" class="pagination-item_link">
+                    <a href="home?index=${indexPage < endPage?indexPage-1:1}" class="pagination-item_link">
                         <i class="pagination-item_icon fa-solid fa-angle-right"></i>
                     </a>
                 </li>
