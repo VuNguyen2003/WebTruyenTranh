@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="btn-read mt-16">
-                        <a class="btn btn-warning" href="readstory?chapterID=onepice2">Đọc từ đầu</a>
+                        <a class="btn btn-warning" href="readstory?ID=${listStory.getStoryId()}">Đọc từ đầu</a>
                     </div>
                 </div>
             </div>
