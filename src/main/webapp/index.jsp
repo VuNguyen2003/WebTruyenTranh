@@ -46,7 +46,7 @@
                                     <img class="img-fluid" src="${i.getCover()}" alt="Image 1">
                                     <div class="caption-content">
                                         <h3>${i.getTitle()}</h3>
-                                        <p>rating: ${i.getRating()}</p>
+                                        <p>favorite: ${i.getFavorite()}</p>
                                     </div>
                                     </a>
                                 </div>
@@ -77,7 +77,7 @@
 					                    <img src="${i.getCover()}" alt="">
 					                    <div class="caption-content">
 					                        <h3>${i.getTitle()}</h3>
-					                        <p>rating: ${i.getRating()}</p>
+					                        <p>favorite: ${i.getFavorite()}</p>
 					                     </div>
 					                     </a>
 				                    </div>

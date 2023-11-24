@@ -446,15 +446,66 @@ public class storyDAO {
 		return list;
 	}
     
+    public ArrayList<Story> favoriteStory(int userid, int indexPage) throws ClassNotFoundException, SQLException{
+		ArrayList<Story> list = new ArrayList<Story>();
+		if(conn == null)
+			conn = ConnectionClass.initializeDatabase();
+		String sql = "Select * from STORY Where STORYID in (select STORYID from FAVORITE where USERID = ? )LIMIT 20 OFFSET ? ";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setInt(1,userid);
+		pstm.setInt(2,indexPage);
+		ResultSet rs = pstm.executeQuery();
+		while (rs.next()) {
+			int storyId = rs.getInt("STORYID");
+			String title = rs.getString("TITLE");
+			Date uploadDate = rs.getDate("UPLOADDATE");
+			//format lại ngày tháng thành kiểu string "ngày/tháng/năm"
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			String strDate = dateFormat.format(uploadDate);
+			float rating = rs.getFloat("RATING");
+			String cover = rs.getString("COVER");
+			int favorite = rs.getInt("FAVORITE");
+			String author = rs.getString("AUTHOR");
+			String summary = rs.getString("SUMMARY");
+			String status = rs.getString("STATUS");
+			Story story = new Story();
+			story.setStoryId(storyId);
+			story.setTitle(title);
+			story.setUploadDate(strDate);
+			story.setRating(rating);
+			story.setCover(cover);
+			story.setFavorite(favorite);
+			story.setAuthor(author);
+			story.setSummary(summary);
+			story.setStatus(status);
+			//lưu lớp story vào list story
+			list.add(story);
+		}
+		return list;
+	}
+    
+    public int countfavoriteStory(int userid) throws ClassNotFoundException, SQLException{
+    	int count = 0;
+		if(conn == null)
+			conn = ConnectionClass.initializeDatabase();
+		String sql = "Select count(*) from STORY Where STORYID in (select STORYID from FAVORITE where USERID = ? )";
+		PreparedStatement pstm = conn.prepareStatement(sql);
+		pstm.setInt(1,userid);
+		ResultSet rs = pstm.executeQuery();
+		while (rs.next()) {
+			count = rs.getInt(1);
+		}
+		return count;
+	}
+    
 	public static void main(String args[]) throws ClassNotFoundException, SQLException, ParseException {
 		ArrayList<Story> results = new ArrayList<Story>();
 		storyDAO dao = new storyDAO();
-		String[] listtag = {"20","1"};
-		results = dao.searchStoriesByTags(0,listtag);
+		results = dao.favoriteStory(2,0);
 		for (Story e : results) {
             System.out.println(e.getTitle());
         }
-		
+		System.out.println(dao.countfavoriteStory(2));
 	}
 	
 	

@@ -31,7 +31,7 @@
 							<img src="${i.cover}" alt="">
 							<div class="caption-content">
 								<h3>${i.title}</h3>
-								<p>${i.rating}</p>
+								<p>favorite: ${i.getFavorite()}</p>
 							</div>
 							</a>
 						</div>

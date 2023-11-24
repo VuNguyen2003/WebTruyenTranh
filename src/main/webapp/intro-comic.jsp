@@ -77,10 +77,11 @@
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                             </div>
-                            <div class="col-6 btn-next-star">
-                                <button type="button" class="btn btn-primary btn-sm btn-fav">Yêu thích</button>
-                            </div>
-                            <input name="strId" value = "${listStory.getStoryId()}" style="display:none">
+                            <form action="favorite" method="post" class="col-6 btn-next-star">
+                                <input name="id" value="${listStory.getStoryId()}" style="display:none">
+                                   <input name="userId" value="${mem.getUserID()}" style="display:none">
+                                <button type="submit" class="btn btn-primary btn-sm btn-fav">Yêu thích</button>
+                            </form>
                             
                         </div>
                     </div>

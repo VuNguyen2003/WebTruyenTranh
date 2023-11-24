@@ -3,7 +3,9 @@ package DTO;
 public class Favorite {
     private int USERID;
     private int STORYID;
-
+    
+    public Favorite() {}
+    
     public Favorite(int USERID, int STORYID) {
         this.USERID = USERID;
         this.STORYID = STORYID;

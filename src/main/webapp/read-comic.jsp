@@ -33,7 +33,7 @@
                                     <a class="home backward" href="intro-comic.html" title="Đảo Hải Tặc">
                                         <i class="fa-solid fa-list"></i>
                                     </a>
-                                    <a href="readstory?ID=${ID}&index=${indexPage == 1? indexPage : indexPage - 1}" class="prev a_prev" >
+                                    <a href="readstory?ID=${ID}&index=${indexPage == 1? indexPage : indexPage - 1}" class="prev a_prev">
                                         <i class="fa-solid fa-chevron-left"></i>
                                     </a>
                                     <select name="ct100$mainContent$ddlSelectChapter" id="ct100_mainContent_ddlSelectChapter" class="select-chapter">

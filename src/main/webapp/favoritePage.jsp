@@ -38,18 +38,18 @@
 	</div>
 		<ul class="pagination mt-32">
                 <li class="pagination-item">
-                    <a href="advancesearch?index=${indexPage > 1?indexPage-1:"1"}&${tags}" class="pagination-item_link">
+                    <a href="favoritepage?indexPage=${indexPage > 1?indexPage-1:"1"}" class="pagination-item_link">
                         <i class="pagination-item_icon fa-solid fa-angle-left"></i>
                     </a>
                 </li>
                 <c:forEach var="i" begin="1" end="${endPage}">
 	                <li class="pagination-item ${indexPage == i?"pagination-item--active":" "}">
-	                    <a href="advancesearch?index=${i}&${tags}" class="pagination-item_link">${i}</a>
+	                    <a href="favoritepage?indexPage=${i}" class="pagination-item_link">${i}</a>
 	                </li>
                	</c:forEach>
 
                 <li class="pagination-item">
-                    <a href="advancesearch?index=${indexPage + 1 > endPage ? indexPage : indexPage + 1}&${tags}" class="pagination-item_link">
+                    <a href="favoritepage?indexPage=${indexPage + 1 > endPage ? indexPage : indexPage + 1}" class="pagination-item_link">
                         <i class="pagination-item_icon fa-solid fa-angle-right"></i>
                     </a>
                 </li>

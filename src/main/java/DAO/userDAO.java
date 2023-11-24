@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
+
 import DTO.User;
 
 public class userDAO {
@@ -24,7 +28,7 @@ public class userDAO {
 			preparedStmt.setInt(1,this.getCount()+1);
 			preparedStmt.setInt(2,user.getPerID());
 			preparedStmt.setString(3,user.getUsername());
-			preparedStmt.setString(4,user.getPassword());
+			preparedStmt.setString(4,encrypt(user.getPassword()));
 			preparedStmt.setString(5,user.getFullname());
 			preparedStmt.setString(6,user.getBirthdate());
 			preparedStmt.setString(7,user.getPhoneNumber());
@@ -44,7 +48,7 @@ public class userDAO {
 	//count user	
 	public int count = 0;
 	//list user 
-	public ArrayList<User> getUsers() throws ClassNotFoundException, SQLException, ParseException {
+	public ArrayList<User> getUsers() throws Exception {
 		if(conn == null) {
 			conn = ConnectionClass.initializeDatabase();
 		}
@@ -72,7 +76,7 @@ public class userDAO {
 			user.setUserID(userId);
 			user.setPerID(perId);
 			user.setUsername(userName);
-			user.setPassword(passWord);
+			user.setPassword(decrypt(passWord));
 			user.setFullname(fullName);
 			user.setBirthdate(birthDay);
 			user.setPhoneNumber(phoneNumber);
@@ -91,7 +95,7 @@ public class userDAO {
 		}
 		try
 	    {
-			String sql = "SELECT * FROM user WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "';";
+			String sql = "SELECT * FROM user WHERE USERNAME = '" + username + "' AND PASSWORD = '" + encrypt(password) + "';";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
@@ -99,7 +103,7 @@ public class userDAO {
 				user.setUserID(rs.getInt("USERID"));
 				user.setPerID(rs.getInt("PERID"));
 				user.setUsername(rs.getString("USERNAME"));
-				user.setPassword(rs.getString("PASSWORD"));
+				user.setPassword(decrypt(rs.getString("PASSWORD")));
 				user.setFullname(rs.getString("FULLNAME"));
 				user.setBirthdate(rs.getString("BIRTHDATE"));
 				user.setPhoneNumber(rs.getString("PHONENUMBER"));				
@@ -128,7 +132,7 @@ public class userDAO {
 				user.setUserID(rs.getInt("USERID"));
 				user.setPerID(rs.getInt("PERID"));
 				user.setUsername(rs.getString("USERNAME"));
-				user.setPassword(rs.getString("PASSWORD"));
+				user.setPassword(decrypt(rs.getString("PASSWORD")));
 				user.setFullname(rs.getString("FULLNAME"));
 				user.setBirthdate(rs.getString("BIRTHDATE"));
 				user.setPhoneNumber(rs.getString("PHONENUMBER"));				
@@ -143,7 +147,7 @@ public class userDAO {
 		return null;
 	}
 	
-	public int getCount() throws ClassNotFoundException, SQLException, ParseException {
+	public int getCount() throws Exception {
 		return this.getUsers().size();
 	}
 	
@@ -152,7 +156,7 @@ public class userDAO {
 			conn = ConnectionClass.initializeDatabase();
 		}
 		try {
-			String sql = "SELECT * FROM user WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "';";
+			String sql = "SELECT * FROM user WHERE USERNAME = '" + username + "' AND PASSWORD = '" + encrypt(password) + "';";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
@@ -173,7 +177,7 @@ public class userDAO {
 			String sql = "UPDATE user SET USERNAME=?, PASSWORD=?, FULLNAME=?, BIRTHDATE=?, PHONENUMBER=?, EMAIL=?, HOMEADDRESS=?, FILENAME=? where USERID=?;";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1,ud.getUsername());
-			ps.setString(2,ud.getPassword());
+			ps.setString(2,encrypt(ud.getPassword()));
 			ps.setString(3,ud.getFullname());
 			ps.setString(4,ud.getBirthdate());
 			ps.setString(5,ud.getPhoneNumber());
@@ -198,7 +202,7 @@ public class userDAO {
 		try {
 			String sql = "UPDATE user SET PASSWORD=? where EMAIL=?;";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1,pass);
+			ps.setString(1,encrypt(pass));
 			ps.setString(2,email);
 			
 			int rs = ps.executeUpdate();
@@ -209,10 +213,31 @@ public class userDAO {
 			
 		}
 	}
+	private static final String ALGORITHM = "AES";
+    private static final String KEY = "key_word_1234567";
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
+    public static String encrypt(String password) throws Exception {
+        SecretKeySpec keySpec = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.ENCRYPT_MODE, keySpec);
+        byte[] encrypted = cipher.doFinal(password.getBytes());
+        return Base64.getEncoder().encodeToString(encrypted);
+    }
+
+    public static String decrypt(String encryptedPassword) throws Exception {
+        SecretKeySpec keySpec = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.DECRYPT_MODE, keySpec);
+        byte[] original = cipher.doFinal(Base64.getDecoder().decode(encryptedPassword));
+        return new String(original);
+    }
+	public static void main(String[] args) throws Exception, Throwable  {
         userDAO u = new userDAO();
-        u.updatePassword("huyhuy","thuhoa08102003@gmail.com");
+        //User user = new User( 1, 1, "VuNguyen", "vunguyen", "nguyenleuyvu", "2003-12-27", "0909658447", "uyvu.ng003@gmail.com", "", "");
+        //u.updateUser(1,user);
+        System.out.println(u.getUser("VuNguyen", "Thuy0302"));
+        
+        
         
     }
 }

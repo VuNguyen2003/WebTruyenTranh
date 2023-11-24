@@ -51,7 +51,7 @@
                             <ul class="sub-menu">
                                 <li><a href="category">CATEGORY</a></li>
                                 <li><a href="hastagsearch">ADVANCE SEARCH</a></li>
-                                <li><a href="favorite">FAVORITE</a></li>
+                                <li><a href="favoritepage">FAVORITE</a></li>
                             </ul>
                         </li>
                         <%-- <% if (user != null) { %>
@@ -62,7 +62,7 @@
 						<li><a href="#">UPLOAD</a></li>
                         <li><a href="#">POLICY</a></li>
                         <li><a href="#">FAQ</a></li>
-                        <li><a href="per-info.html">SETTING</a></li>
+                        <li><a href="#">SETTING</a></li>
                     </div>
                     <div class="menu-right">
                         <form action="search" class="search-btn">

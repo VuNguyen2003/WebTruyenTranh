@@ -97,6 +97,7 @@ public class updateUserController extends HttpServlet {
 				HttpSession s = request.getSession();
 				s.setAttribute("mem", user);
 				
+				
 			} catch (ClassNotFoundException | SQLException | ParseException e) {
 				e.printStackTrace();
 			}
