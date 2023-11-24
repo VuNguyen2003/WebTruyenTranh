@@ -18,7 +18,7 @@ public class favoriteController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("viewintro").forward(request, response);
+		request.getRequestDispatcher("home").forward(request, response);
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,7 +43,8 @@ public class favoriteController extends HttpServlet{
 		} catch (ClassNotFoundException | SQLException | ParseException e) {
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("viewintro").forward(request, response);
+		
+		request.getRequestDispatcher("home").forward(request, response);
 	}
 	public void destroy() {
 		
