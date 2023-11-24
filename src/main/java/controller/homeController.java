@@ -33,14 +33,14 @@ public class homeController extends HttpServlet{
 		}
 		try {
 			int Count = Story.CountPage();
-			int pageSize = 20;
+			int pageSize = 16;
 			int endPage = Count / pageSize;
 			if(Count % pageSize != 0) {
 				endPage++;
 			}
 			ArrayList<Story> list = new ArrayList<Story>();
 			ArrayList<Story> Toplist = new ArrayList<Story>();
-			list = Story.getStory((Integer.parseInt(indexPage)-1)*20);
+			list = Story.getStory((Integer.parseInt(indexPage)-1)*16);
 			Toplist = Story.topStory();
 			request.setAttribute("indexPage", indexPage);
 			request.setAttribute("endPage", endPage);

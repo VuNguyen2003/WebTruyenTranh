@@ -166,7 +166,7 @@ public class storyDAO {
 		//tạo list Story để lưu truyện về
 		ArrayList<Story> list = new ArrayList<Story> ();
 		//câu truy vấn
-		String sql = "Select * from STORY LIMIT 20 OFFSET " + String.valueOf(startpage);
+		String sql = "Select * from STORY LIMIT 16 OFFSET " + String.valueOf(startpage);
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		ResultSet rs = pstm.executeQuery();
 		//lấy cơ sở dữ liệu vào lớp Story
